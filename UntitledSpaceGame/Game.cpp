@@ -68,8 +68,8 @@ void Game::run()
 {
 	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", m_pRenderer);
 	//Set up game objects
-	mGameObjects.push_back(new Player(new LoaderParams(100, 100, 127, 324, "character")));
-	mGameObjects.push_back(new Enemy(new LoaderParams(500, 500, 127, 324, "character")));
+	mGameObjects.push_back(new Player(new LoaderParams(100, 100, 166, 138, "Player")));
+	mGameObjects.push_back(new Enemy(new LoaderParams(500, 500, 166, 138, "Player")));
 	running = true;
 
 
