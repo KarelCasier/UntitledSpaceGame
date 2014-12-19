@@ -9,5 +9,6 @@ public:
 
 	void draw();
 	void update(Uint32 dTime);
+	void handleInput();
 	void clean();
 };

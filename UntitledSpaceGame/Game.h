@@ -28,6 +28,7 @@ public:
 	bool init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void run();
 	bool isRunning() { return running; }
+	void quit();
 
 	// make the constructor private
 private:
@@ -35,7 +36,6 @@ private:
 	Game();
 	// create the s_pInstance member variable
 	static Game* s_pInstance;
-	// create the typedef
 
 private:
 
@@ -59,5 +59,5 @@ private:
 
 
 };
-
+// create the typedef
 typedef Game TheGame;

@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "InputHandler.h"
 #include <iostream>
 
 Game* Game::s_pInstance = 0;
@@ -124,6 +125,20 @@ void Game::update(Uint32 dTime)
 
 void Game::processEvents()
 {
-	//SDL_Event& e
+	SDL_Event e;
+	while (SDL_PollEvent(&e))
+	{
+		TheInputHandler::Instance()->handleEvents(e);
+
+		if (e.type == SDL_QUIT)
+		{
+			TheGame::Instance()->quit();
+		}
+	}
+
+}
+
+void Game::quit()
+{
 
 }
