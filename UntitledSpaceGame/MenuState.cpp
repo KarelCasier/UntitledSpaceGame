@@ -5,17 +5,17 @@ void MenuState::update()
 
 }
 
-void Menustate::render()
+void MenuState::render()
 {
 
 }
 
-void Menustate::onEnter()
+void MenuState::onEnter()
 {
 
 }
 
-void Menustate::onExit()
+void MenuState::onExit()
 {
 
 }
