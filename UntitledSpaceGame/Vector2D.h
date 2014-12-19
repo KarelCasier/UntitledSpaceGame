@@ -29,7 +29,7 @@ public:
     void setX(float x) { m_x = x; }
     void setY(float y) { m_y = y; }
     
-    int length() { return sqrt(m_x * m_x + m_y * m_y); }
+    float length() { sqrt(m_x * m_x + m_y * m_y); }
     
     Vector2D operator+(const Vector2D& v2) const { return Vector2D(m_x + v2.m_x, m_y + v2.m_y); }
     friend Vector2D& operator+=(Vector2D& v1, const Vector2D& v2)
@@ -79,7 +79,7 @@ public:
     
     void normalize()
     {
-        int l = length();
+        float l = length();
         if ( l > 0)
         {
             (*this) *= 1 / l;

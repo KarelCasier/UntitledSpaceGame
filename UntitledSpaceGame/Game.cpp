@@ -61,12 +61,19 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		std::cout << "SDL init fail\n";
 		return false; // SDL init fail
 	}
+
+	//Set up GameStateMachine
+	mpGameStateMachine = new GameStateMachine();
+
 	return true;
 }
 
 //Called by main() after init
 void Game::run()
 {
+	//Add the Menu State to the GameStateMachine
+	mpGameStateMachine->PushState(new MenuState());
+
 	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", m_pRenderer);
 	//Set up game objects
 	mGameObjects.push_back(new Player(new LoaderParams(100, 100, 166, 138, "Player")));
@@ -130,6 +137,14 @@ void Game::processEvents()
 	{
 		TheInputHandler::Instance()->handleEvents(e);
 
+		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
+		{
+			mpGameStateMachine->ChangeState(new PlayState());
+		}
+		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
+		{
+			TheGame::Instance()->quit();
+		}
 		if (e.type == SDL_QUIT)
 		{
 			TheGame::Instance()->quit();
@@ -140,5 +155,5 @@ void Game::processEvents()
 
 void Game::quit()
 {
-
+	SDL_Quit();
 }

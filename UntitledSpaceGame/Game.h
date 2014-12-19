@@ -8,6 +8,10 @@
 #include "TextureManager.h"
 #include <vector>
 
+#include "GameStateMachine.h"
+#include "MenuState.h"
+#include "PlayState.h"
+
 class Game
 {
 public:
@@ -52,6 +56,8 @@ private:
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
+
+	GameStateMachine* mpGameStateMachine;;
 
 	SDL_Surface* testSurface = NULL;
 

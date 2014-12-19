@@ -1,11 +1,14 @@
-#include <string>
+#pragma once
 
-//Pure abstract class for gamestates
+#include <string>
+#include <iostream>
+
+//Pure abstract class for game states
 class GameState
 {
 public:
 	virtual void update() = 0;
-	virtual void redner() = 0;
+	virtual void render() = 0;
 
 	virtual bool onEnter() = 0;
 	virtual bool onExit() = 0;
