@@ -1,5 +1,7 @@
 #include "MenuState.h"
 
+const std::string MenuState::s_menuID = "MENU";
+
 void MenuState::update()
 {
 
@@ -10,12 +12,14 @@ void MenuState::render()
 
 }
 
-void MenuState::onEnter()
+bool MenuState::onEnter()
 {
-
+	std::cout << "Entering MenuState" << std::endl;
+	return true;
 }
 
-void MenuState::onExit()
+bool MenuState::onExit()
 {
-
+	std::cout << "Exiting MenuState" << std::endl;
+	return true;
 }

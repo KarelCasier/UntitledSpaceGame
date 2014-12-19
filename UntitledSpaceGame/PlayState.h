@@ -1,6 +1,6 @@
 #include "GameState.h"
 
-class MenuState : public GameState
+class PlayState : public GameState
 {
 public:
 	virtual void update();
@@ -9,8 +9,8 @@ public:
 	virtual bool onEnter();
 	virtual bool onExit();
 
-	virtual std::string getStateID() const { return s_menuID; }
+	virtual std::string getStateID() const { return s_playID; }
 
 private:
-	static const std::string s_menuID;
+	static const std::string s_playID;
 };
