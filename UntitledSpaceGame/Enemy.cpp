@@ -12,8 +12,8 @@ void Enemy::draw()
 
 void Enemy::update(Uint32 dTime)
 {
-	mAcceleration.setX(1);
-	mAcceleration.setY(1);
+	//mAcceleration.setX(1);
+	//mAcceleration.setY(1);
 	///mCurrentFrame = int(((SDL_GetTicks() / 100) % 6));
 	SDLGameObject::update(dTime);
 }
