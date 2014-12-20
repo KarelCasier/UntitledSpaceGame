@@ -113,20 +113,23 @@ void Game::render()
 	SDL_SetRenderDrawColor(m_pRenderer, 50, 50, 50, 255);
 	SDL_RenderClear(m_pRenderer);
 
-	for (GameObject* gameObject : mGameObjects)
-	{
-		gameObject->draw();
-	}
+	mpGameStateMachine->render();
+	//for (GameObject* gameObject : mGameObjects)
+	//{
+	//	gameObject->draw();
+	//}
 
 	SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::update(Uint32 dTime)
 {
-	for (GameObject* gameObject : mGameObjects)
-	{
-		gameObject->update(dTime);
-	}
+	mpGameStateMachine->update(dTime);
+
+	//for (GameObject* gameObject : mGameObjects)
+	//{
+	//	gameObject->update(dTime);
+	//}
 
 }
 
@@ -137,18 +140,19 @@ void Game::processEvents()
 	{
 		TheInputHandler::Instance()->handleEvents(e);
 
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
-		{
-			mpGameStateMachine->ChangeState(new PlayState());
-		}
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
-		{
-			TheGame::Instance()->quit();
-		}
 		if (e.type == SDL_QUIT)
 		{
 			TheGame::Instance()->quit();
 		}
+	}
+
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
+	{
+		mpGameStateMachine->ChangeState(new PlayState());
+	}
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
+	{
+		TheGame::Instance()->quit();
 	}
 
 }

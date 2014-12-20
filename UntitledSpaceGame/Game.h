@@ -57,7 +57,7 @@ private:
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 
-	GameStateMachine* mpGameStateMachine;;
+	GameStateMachine* mpGameStateMachine;
 
 	SDL_Surface* testSurface = NULL;
 

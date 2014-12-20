@@ -10,6 +10,9 @@ public:
 	void ChangeState(GameState *pState);
 	void PopState();
 
+	void update(Uint32 dTime);
+	void render();
+
 private:
 	std::vector<GameState*> mGameStates;
 };

@@ -11,7 +11,7 @@ void GameStateMachine::ChangeState(GameState* pState)
 	if (!mGameStates.empty())
 	{
 		//Check not switching to the same state
-		if (mGameStates.back()->getStateID() != pState->getStateID())
+		if (mGameStates.back()->getStateID() == pState->getStateID())
 		{
 			return;
 		}
@@ -43,5 +43,21 @@ void GameStateMachine::PopState()
 			//Remove the pointer from the array
 			mGameStates.pop_back();
 		}
+	}
+}
+
+void GameStateMachine::update(Uint32 dTime)
+{
+	if (!mGameStates.empty())
+	{
+		mGameStates.back()->update(dTime);
+	}
+}
+
+void GameStateMachine::render()
+{
+	if (!mGameStates.empty())
+	{
+		mGameStates.back()->render();
 	}
 }

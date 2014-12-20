@@ -2,7 +2,7 @@
 
 const std::string MenuState::s_menuID = "MENU";
 
-void MenuState::update()
+void MenuState::update(Uint32 dTime)
 {
 
 }

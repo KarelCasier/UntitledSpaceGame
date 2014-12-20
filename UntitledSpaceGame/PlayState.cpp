@@ -2,7 +2,7 @@
 
 const std::string PlayState::s_playID = "PLAY";
 
-void PlayState::update()
+void PlayState::update(Uint32 dTime)
 {
 
 }
