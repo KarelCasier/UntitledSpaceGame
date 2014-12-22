@@ -3,6 +3,7 @@
 #include "SDLGameObject.h"
 
 #include "LoaderParams.h"
+#include "InputHandler.h"
 
 class MenuButton : public SDLGameObject
 {
@@ -11,7 +12,7 @@ public:
 	MenuButton(const LoaderParams* pParams);
 
 	virtual void draw();
-	virtual void update();
+	virtual void update(Uint32 dTime);
 	virtual void clean();
 
 private:
