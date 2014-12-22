@@ -31,3 +31,8 @@ void MenuButton::update(Uint32 dTime)
 		mCurrentFrame = MOUSE_OUT;
 	}
 }
+
+void MenuButton::clean()
+{
+	SDLGameObject::clean();
+}
