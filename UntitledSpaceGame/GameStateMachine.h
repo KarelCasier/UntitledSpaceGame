@@ -6,9 +6,10 @@
 class GameStateMachine
 {
 public:
-	void PushState(GameState *pState);
-	void ChangeState(GameState *pState);
-	void PopState();
+	void pushState(GameState *pState);
+	void changeState(GameState *pState);
+	void popState();
+	void clean();
 
 	void update(Uint32 dTime);
 	void render();

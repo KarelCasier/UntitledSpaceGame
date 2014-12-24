@@ -72,12 +72,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 void Game::run()
 {
 	//Add the Menu State to the GameStateMachine
-	mpGameStateMachine->PushState(new MenuState());
+	mpGameStateMachine->pushState(new MenuState());
 
-	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", m_pRenderer);
-	//Set up game objects
-	mGameObjects.push_back(new Player(new LoaderParams(100, 100, 166, 138, "Player")));
-	mGameObjects.push_back(new Enemy(new LoaderParams(500, 500, 166, 138, "Player")));
 	running = true;
 
 
@@ -114,10 +110,6 @@ void Game::render()
 	SDL_RenderClear(m_pRenderer);
 
 	mpGameStateMachine->render();
-	//for (GameObject* gameObject : mGameObjects)
-	//{
-	//	gameObject->draw();
-	//}
 
 	SDL_RenderPresent(m_pRenderer);
 }
@@ -125,12 +117,6 @@ void Game::render()
 void Game::update(Uint32 dTime)
 {
 	mpGameStateMachine->update(dTime);
-
-	//for (GameObject* gameObject : mGameObjects)
-	//{
-	//	gameObject->update(dTime);
-	//}
-
 }
 
 void Game::processEvents()
@@ -146,18 +132,10 @@ void Game::processEvents()
 		}
 	}
 
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
-	{
-		mpGameStateMachine->ChangeState(new PlayState());
-	}
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
-	{
-		TheGame::Instance()->quit();
-	}
-
 }
 
 void Game::quit()
 {
+	mpGameStateMachine->popState();
 	SDL_Quit();
 }

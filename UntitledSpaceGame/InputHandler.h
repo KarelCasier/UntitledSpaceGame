@@ -32,6 +32,8 @@ public:
 	Vector2D* getMousePosition() { return mMousePosition; }
 	bool isKeyDown(SDL_Scancode key);
 
+	void reset();
+
 	//void initialiseJoysticks();
 	//bool joysticksInitialised() {return mbJoysticksInitialised;}
 

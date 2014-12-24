@@ -11,6 +11,7 @@
 #include "GameStateMachine.h"
 #include "MenuState.h"
 #include "PlayState.h"
+#include "PauseState.h"
 
 class Game
 {
@@ -28,6 +29,7 @@ public:
 	}
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
+	GameStateMachine* getStateMachine(){ return mpGameStateMachine; }
 
 	int getWidth() { return mGameWidth; }
 	int getHeight() { return mGameHeight; }
@@ -63,8 +65,6 @@ private:
 	GameStateMachine* mpGameStateMachine;
 
 	SDL_Surface* testSurface = NULL;
-
-	std::vector<GameObject*> mGameObjects;
 
 
 };

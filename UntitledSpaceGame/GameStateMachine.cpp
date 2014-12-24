@@ -1,5 +1,70 @@
 #include "GameStateMachine.h"
 
+void GameStateMachine::clean()
+{
+	if (!mGameStates.empty())
+	{
+		mGameStates.back()->onExit();
+
+		delete mGameStates.back();
+
+		mGameStates.clear();
+	}
+}
+
+void GameStateMachine::update(Uint32 dTime)
+{
+	if (!mGameStates.empty())
+	{
+		mGameStates.back()->update(dTime);
+	}
+}
+
+void GameStateMachine::render()
+{
+	if (!mGameStates.empty())
+	{
+		mGameStates.back()->render();
+	}
+}
+
+void GameStateMachine::pushState(GameState *pState)
+{
+	mGameStates.push_back(pState);
+	mGameStates.back()->onEnter();
+}
+
+void GameStateMachine::popState()
+{
+	if (!mGameStates.empty())
+	{
+		mGameStates.back()->onExit();
+		mGameStates.pop_back();
+	}
+
+	//mGameStates.back()->resume();
+}
+
+void GameStateMachine::changeState(GameState *pState)
+{
+	if (!mGameStates.empty())
+	{
+		if (mGameStates.back()->getStateID() == pState->getStateID())
+		{
+			return; // do nothing
+		}
+
+		mGameStates.back()->onExit();
+		mGameStates.pop_back();
+	}
+
+	// initialise it
+	pState->onEnter();
+
+	// push back our new state
+	mGameStates.push_back(pState);
+}
+/*
 void GameStateMachine::PushState(GameState* pState)
 {
 	mGameStates.push_back(pState);
@@ -61,3 +126,4 @@ void GameStateMachine::render()
 		mGameStates.back()->render();
 	}
 }
+*/

@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include <vector>
 
-class MenuState : public GameState
+class PauseState : public GameState
 {
 public:
 	virtual void update(Uint32 dTime);
@@ -13,14 +13,14 @@ public:
 	virtual bool onEnter();
 	virtual bool onExit();
 
-	virtual std::string getStateID() const { return s_menuID; }
+	virtual std::string getStateID() const { return s_pauseID; }
 
 private:
-	static const std::string s_menuID;
+	static const std::string s_pauseID;
 
 	std::vector<GameObject*> mGameObjects;
 
 	//callback functions
-	static void menuToPlay();
-	static void exitFromMenu();
+	static void resumePlay();
+	static void pauseToMain();
 };

@@ -8,17 +8,29 @@ const std::string MenuState::s_menuID = "MENU";
 
 void MenuState::update(Uint32 dTime)
 {
-	for (GameObject * object : mGameObjects)
+	if (!mGameObjects.empty())
 	{
-		object->update(dTime);
+		for (int i = 0; i < mGameObjects.size(); i++)
+		{
+			if (mGameObjects[i] != 0)
+			{
+				mGameObjects[i]->update(dTime);
+			}
+		}
 	}
 }
 
 void MenuState::render()
 {
-	for (GameObject * object : mGameObjects)
+	if (!mGameObjects.empty())
 	{
-		object->draw();
+		for (int i = 0; i < mGameObjects.size(); i++)
+		{
+			if (mGameObjects[i] != 0)
+			{
+				mGameObjects[i]->draw();
+			}
+		}
 	}
 }
 
@@ -35,10 +47,11 @@ bool MenuState::onEnter()
 	if (!TheTextureManager::Instance()->load("Assets/UI/PlayButton.png", "PlayButton", TheGame::Instance()->getRenderer())) return false;
 	//Exit Button
 	if (!TheTextureManager::Instance()->load("Assets/UI/ExitButton.png", "ExitButton", TheGame::Instance()->getRenderer())) return false;
+
 	//~~~~~~~~~~~~~~~~~~~~~~Initiate Objects~~~~~~~~~~~~~~~~~~~~~~~~~
 	mGameObjects.push_back(new SDLGameObject(new LoaderParams(windowWidth / 2 - (932 / 2), 100, 932, 130, "MenuTitle")));
-	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50, 350, 100, "PlayButton")));
-	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50 + 150, 350, 100, "ExitButton")));
+	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50, 350, 100, "PlayButton"), menuToPlay));
+	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50 + 150, 350, 100, "ExitButton"), exitFromMenu));
 	return true;
 }
 
@@ -53,6 +66,18 @@ bool MenuState::onExit()
 	TheTextureManager::Instance()->clearFromTextureMap("MenuTitle");
 	TheTextureManager::Instance()->clearFromTextureMap("PlayButton");
 	TheTextureManager::Instance()->clearFromTextureMap("ExitButton");
-
+	TheInputHandler::Instance()->reset();
 	return true;
+}
+
+void MenuState::menuToPlay()
+{
+	std::cout << "Play Button Clicked" << std::endl;
+	TheGame::Instance()->getStateMachine()->changeState(new PlayState());
+}
+
+void MenuState::exitFromMenu()
+{
+	std::cout << "Exit Button Pressed" << std::endl;
+	TheGame::Instance()->quit();
 }
