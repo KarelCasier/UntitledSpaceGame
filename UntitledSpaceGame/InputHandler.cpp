@@ -44,6 +44,7 @@ InputHandler::InputHandler()
 	}
 
 	mMousePosition = new Vector2D(0.f, 0.f);
+	relativeMousePosition = new Vector2D(0.f, 0.f);
 }
 
 void InputHandler::handleEvents(SDL_Event &e)
@@ -112,6 +113,13 @@ void InputHandler::onMouseMove(SDL_Event& e)
 	mMousePosition->setY(e.motion.y);
 }
 
+Vector2D* InputHandler::getMousePosition(Camera* camera)
+{
+	relativeMousePosition->m_x = mMousePosition->getX() + camera->getPosition().m_x;
+	relativeMousePosition->m_x = mMousePosition->getY() + camera->getPosition().m_x;
+	return relativeMousePosition;
+}
+
 void InputHandler::onKeyDown()
 {
 	mKeyStates = SDL_GetKeyboardState(0);  //Update keyboard states
@@ -148,4 +156,6 @@ void InputHandler::reset()
 
 InputHandler::~InputHandler()
 {
+	delete mMousePosition;
+	delete relativeMousePosition;
 }

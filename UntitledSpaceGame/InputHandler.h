@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <vector>
 #include "Vector2D.h"
+#include "Camera.h"
 
 class InputHandler
 {
@@ -29,7 +30,7 @@ public:
 	void clean();
 
 	bool getMouseButtonState(int buttonNumber) { return mMouseButtonStates[buttonNumber]; }
-	Vector2D* getMousePosition() { return mMousePosition; }
+	Vector2D* getMousePosition(Camera* camera);
 	bool isKeyDown(SDL_Scancode key);
 
 	void reset();
@@ -46,7 +47,9 @@ private:
 
 	//std::vector<SDL_Joystick*> m_joysticks;
 	std::vector<bool> mMouseButtonStates;
+
 	Vector2D* mMousePosition;
+	Vector2D* relativeMousePosition;
 
 	const Uint8* mKeyStates;
 

@@ -5,9 +5,9 @@ class Player : public SDLGameObject
 {
 public:
 
-	Player(const LoaderParams* pParams);
+	Player(Camera* camera, const LoaderParams* pParams);
 
-	void draw(Camera* cam);
+	void draw();
 	void update(Uint32 dTime);
 	void handleInput();
 	void clean();

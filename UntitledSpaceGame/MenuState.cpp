@@ -28,7 +28,7 @@ void MenuState::render()
 		{
 			if (mGameObjects[i] != 0)
 			{
-				mGameObjects[i]->draw(UICamera);
+				mGameObjects[i]->draw();
 			}
 		}
 	}
@@ -51,9 +51,9 @@ bool MenuState::onEnter()
 	if (!TheTextureManager::Instance()->load("Assets/UI/ExitButton.png", "ExitButton", TheGame::Instance()->getRenderer())) return false;
 
 	//~~~~~~~~~~~~~~~~~~~~~~Initiate Objects~~~~~~~~~~~~~~~~~~~~~~~~~
-	mGameObjects.push_back(new SDLGameObject(new LoaderParams(windowWidth / 2 - (932 / 2), 100, 932, 130, "MenuTitle")));
-	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50, 350, 100, "PlayButton"), menuToPlay));
-	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50 + 150, 350, 100, "ExitButton"), exitFromMenu));
+	mGameObjects.push_back(new SDLGameObject(UICamera, new LoaderParams(windowWidth / 2 - (932 / 2), 100, 932, 130, "MenuTitle")));
+	mGameObjects.push_back(new MenuButton(UICamera, new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50, 350, 100, "PlayButton"), menuToPlay));
+	mGameObjects.push_back(new MenuButton(UICamera, new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50 + 150, 350, 100, "ExitButton"), exitFromMenu));
 	return true;
 }
 

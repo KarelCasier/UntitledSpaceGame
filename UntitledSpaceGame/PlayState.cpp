@@ -53,7 +53,7 @@ void PlayState::render()
 		{
 			if (mGameObjects[i] != 0)
 			{
-				mGameObjects[i]->draw(WorldCamera);
+				mGameObjects[i]->draw();
 			}
 		}
 	}
@@ -68,8 +68,8 @@ bool PlayState::onEnter()
 
 	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", TheGame::Instance()->getRenderer());
 
-	mGameObjects.push_back(new Enemy(new LoaderParams(100, 100, 166, 138, "Player")));
-	mpPlayer = new Player(new LoaderParams(100, 100, 166, 138, "Player"));
+	mGameObjects.push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 166, 138, "Player")));
+	mpPlayer = new Player(WorldCamera, new LoaderParams(100, 100, 166, 138, "Player"));
 	mGameObjects.push_back(mpPlayer);
 
 	return true;

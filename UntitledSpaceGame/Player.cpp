@@ -1,15 +1,15 @@
 #include "Player.h"
 #include "InputHandler.h"
 
-Player::Player(const LoaderParams* pParams)
-: SDLGameObject(pParams)
+Player::Player(Camera* camera, const LoaderParams* pParams)
+: SDLGameObject(camera, pParams)
 {
 
 }
 
-void Player::draw(Camera* cam)
+void Player::draw()
 {
-	SDLGameObject::draw(cam);
+	SDLGameObject::draw();
 }
 
 void Player::update(Uint32 dTime)
@@ -28,7 +28,7 @@ void Player::handleInput()
 	}
 
 	//Move to mouse position
-	Vector2D* mousePos = TheInputHandler::Instance()->getMousePosition();
+	Vector2D* mousePos = TheInputHandler::Instance()->getMousePosition(mCamera);
 
 	mVelocity = (*mousePos - mPosition) / 10;
 

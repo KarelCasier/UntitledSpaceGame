@@ -27,7 +27,7 @@ void PauseState::render()
 		{
 			if (mGameObjects[i] != 0)
 			{
-				mGameObjects[i]->draw(UICamera);
+				mGameObjects[i]->draw();
 			}
 		}
 	}
@@ -50,8 +50,8 @@ bool PauseState::onEnter()
 
 	//~~~~~~~~~~~~~~~~~~~~~~Initiate Objects~~~~~~~~~~~~~~~~~~~~~~~~~
 	//mGameObjects.push_back(new SDLGameObject(new LoaderParams(windowWidth / 2 - (932 / 2), 100, 932, 130, "MenuTitle")));
-	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50, 350, 100, "ResumeButton"), resumePlay));
-	mGameObjects.push_back(new MenuButton(new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50 + 150, 350, 100, "MenuButton"), pauseToMain));
+	mGameObjects.push_back(new MenuButton(UICamera,new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50, 350, 100, "ResumeButton"), resumePlay));
+	mGameObjects.push_back(new MenuButton(UICamera,new LoaderParams(windowWidth / 2 - 175, windowHeight / 2 - 50 + 150, 350, 100, "MenuButton"), pauseToMain));
 	return true;
 }
 

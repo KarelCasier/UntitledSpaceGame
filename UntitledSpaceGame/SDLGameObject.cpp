@@ -3,11 +3,12 @@
 #include "Game.h"
 
 
-SDLGameObject::SDLGameObject(const LoaderParams* pParams) :
+SDLGameObject::SDLGameObject(Camera* camera,const LoaderParams* pParams) :
 GameObject(pParams),
 mPosition(pParams->getX(), pParams->getY()),
 mVelocity(0.f, 0.f),
-mAcceleration(0.f, 0.f)
+mAcceleration(0.f, 0.f),
+mCamera(camera)
 {
 	mWidth = pParams->getWidth();
 	mHeight = pParams->getHeight();
@@ -16,9 +17,9 @@ mAcceleration(0.f, 0.f)
 	mCurrentFrame = 1;
 }
 
-void SDLGameObject::draw(Camera* cam)
+void SDLGameObject::draw()
 {
-	TheTextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(), mWidth, mHeight, mCurrentRow, mCurrentFrame, TheGame::Instance()->getRenderer(), 0, 255, cam, SDL_FLIP_NONE);
+	TheTextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(), mWidth, mHeight, mCurrentRow, mCurrentFrame, TheGame::Instance()->getRenderer(), 0, 255, mCamera, SDL_FLIP_NONE);
 }
 
 void SDLGameObject::update(Uint32 dTime)
@@ -29,5 +30,5 @@ void SDLGameObject::update(Uint32 dTime)
 
 void SDLGameObject::clean()
 {
-
+	delete mCamera;
 }

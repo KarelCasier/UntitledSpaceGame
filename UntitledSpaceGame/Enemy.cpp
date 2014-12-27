@@ -1,13 +1,13 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const LoaderParams* pParams)
-: SDLGameObject(pParams)
+Enemy::Enemy(Camera* camera, const LoaderParams* pParams)
+: SDLGameObject(camera, pParams)
 {
 }
 
-void Enemy::draw(Camera* cam)
+void Enemy::draw()
 {
-	SDLGameObject::draw(cam);
+	SDLGameObject::draw();
 }
 
 void Enemy::update(Uint32 dTime)

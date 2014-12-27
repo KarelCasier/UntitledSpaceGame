@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "GameObject.h"
 #include <vector>
+#include "Camera.h"
 
 class PauseState : public GameState
 {

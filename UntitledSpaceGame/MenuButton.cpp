@@ -1,20 +1,20 @@
 #include "MenuButton.h"
 
-MenuButton::MenuButton(const LoaderParams* pParams, void (*callback)())
-: SDLGameObject(pParams)
+MenuButton::MenuButton(Camera* camera, const LoaderParams* pParams, void (*callback)())
+: SDLGameObject(camera, pParams)
 , mCallback(callback)
 {
 	mCurrentFrame = MOUSE_OUT;
 }
 
-void MenuButton::draw(Camera* cam)
+void MenuButton::draw()
 {
-	SDLGameObject::draw(cam);
+	SDLGameObject::draw();
 }
 
 void MenuButton::update(Uint32 dTime)
 {
-	Vector2D* pMousePos = TheInputHandler::Instance()->getMousePosition();
+	Vector2D* pMousePos = TheInputHandler::Instance()->getMousePosition(mCamera);
 
 	if (pMousePos->getX() < (mPosition.getX() + mWidth)
 		&& pMousePos->getX() > mPosition.getX()

@@ -2,18 +2,21 @@
 #include "GameObject.h"
 #include "LoaderParams.h"
 #include "Vector2D.h"
+#include "Camera.h"
 
 class SDLGameObject : public GameObject
 {
 public:
-	SDLGameObject(const LoaderParams* pParams);
+	SDLGameObject(Camera* camera, const LoaderParams* pParams);
 	
 
-	virtual void draw(Camera* cam);
+	virtual void draw();
 	virtual void update(Uint32 dTime);
 	virtual void clean();
 
 	Vector2D getPosition() { return mPosition; }
+	Camera* getCamera() { return mCamera; }
+	void setCamera(Camera* camera) { mCamera = camera; }
 
 protected:
 
@@ -21,6 +24,7 @@ protected:
 	int mHeight;
 	int mCurrentRow;
 	int mCurrentFrame;
+	Camera* mCamera;
 	std::string mTextureID;
 	
 	Vector2D mPosition;

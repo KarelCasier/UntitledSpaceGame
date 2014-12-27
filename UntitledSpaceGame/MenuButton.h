@@ -9,9 +9,9 @@ class MenuButton : public SDLGameObject
 {
 public:
 
-	MenuButton(const LoaderParams* pParams, void (*callback)());
+	MenuButton(Camera* camera, const LoaderParams* pParams, void (*callback)());
 
-	virtual void draw(Camera* cam);
+	virtual void draw();
 	virtual void update(Uint32 dTime);
 	virtual void clean();
 
