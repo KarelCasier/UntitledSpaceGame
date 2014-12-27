@@ -27,7 +27,7 @@ void PauseState::render()
 		{
 			if (mGameObjects[i] != 0)
 			{
-				mGameObjects[i]->draw();
+				mGameObjects[i]->draw(UICamera);
 			}
 		}
 	}
@@ -38,7 +38,8 @@ bool PauseState::onEnter()
 	std::cout << "Entering PauseState" << std::endl;
 	int windowWidth = TheGame::Instance()->getWidth();
 	int windowHeight = TheGame::Instance()->getHeight();
-
+	//Set up Camera
+	UICamera = new Camera;
 	//~~~~~~~~~~~~~~~~~~~~~~Load resources~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Title
 	//if (!TheTextureManager::Instance()->load("Assets/UI/MenuTitle.png", "MenuTitle", TheGame::Instance()->getRenderer())) return false;
@@ -65,6 +66,7 @@ bool PauseState::onExit()
 	TheTextureManager::Instance()->clearFromTextureMap("ResumeButton");
 	TheTextureManager::Instance()->clearFromTextureMap("MenuButton");
 	TheInputHandler::Instance()->reset();
+	delete UICamera;
 	return true;
 }
 

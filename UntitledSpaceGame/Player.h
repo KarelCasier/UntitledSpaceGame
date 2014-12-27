@@ -7,7 +7,7 @@ public:
 
 	Player(const LoaderParams* pParams);
 
-	void draw();
+	void draw(Camera* cam);
 	void update(Uint32 dTime);
 	void handleInput();
 	void clean();

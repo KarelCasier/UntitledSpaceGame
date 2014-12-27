@@ -9,9 +9,11 @@ public:
 	SDLGameObject(const LoaderParams* pParams);
 	
 
-	virtual void draw();
+	virtual void draw(Camera* cam);
 	virtual void update(Uint32 dTime);
 	virtual void clean();
+
+	Vector2D getPosition() { return mPosition; }
 
 protected:
 

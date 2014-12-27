@@ -5,14 +5,21 @@
 class LoaderParams
 {
 public:
+	enum TAG
+	{
+		DEFAULT,
+		UI,
+		OBJECT
+	};
 
-	LoaderParams(int x, int y, int width, int height, std::string textureID) : mX(x), mY(y), mWidth(width), mHeight(height), mTextureID(textureID)
+	LoaderParams(int x, int y, int width, int height, std::string textureID, TAG tag = TAG::DEFAULT) : mX(x), mY(y), mWidth(width), mHeight(height), mTextureID(textureID), mTag(tag)
 	{
 	}
 	int getX() const { return mX; }
 	int getY() const { return mY; }
 	int getWidth() const { return mWidth; }
 	int getHeight() const { return mHeight; }
+	TAG getTag() const { return mTag; }
 	std::string getTextureID() const { return mTextureID; }
 
 private:
@@ -21,5 +28,6 @@ private:
 	int mY;
 	int mWidth;
 	int mHeight;
+	TAG mTag;
 	std::string mTextureID;
 };

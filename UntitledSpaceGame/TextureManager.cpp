@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 #include "SDL_image.h"
 #include "SDL.h"
+#include "Camera.h"
 
 TextureManager* TextureManager::s_pInstance = 0;
 
@@ -27,7 +28,7 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
 	return false;
 }
 
-void TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip)
+void TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, Camera* cam, SDL_RendererFlip flip)
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
@@ -36,13 +37,13 @@ void TextureManager::draw(std::string id, int x, int y, int width, int height, S
 	srcRect.y = 0;
 	srcRect.w = destRect.w = width;
 	srcRect.h = destRect.h = height;
-	destRect.x = x;
-	destRect.y = y;
+	destRect.x = x - cam->getPosition().m_x;
+	destRect.y = y - cam->getPosition().m_y;
 
 	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
-void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer, double angle, int alpha, SDL_RendererFlip flip)
+void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer, double angle, int alpha, Camera* cam, SDL_RendererFlip flip)
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
@@ -50,14 +51,14 @@ void TextureManager::drawFrame(std::string id, int x, int y, int width, int heig
 	srcRect.y = height * (currentRow-1);
 	srcRect.w = destRect.w = width;
 	srcRect.h = destRect.h = height;
-	destRect.x = x;
-	destRect.y = y;
+	destRect.x = x - cam->getPosition().m_x;
+	destRect.y = y - cam->getPosition().m_y;
 	//SDL_SetTextureBlendMode(m_textureMap[id], SDL_BLENDMODE_BLEND);
 	SDL_SetTextureAlphaMod(m_textureMap[id], alpha);
 	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, angle, 0, flip);
 }
 
-void TextureManager::drawTile(std::string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer)
+void TextureManager::drawTile(std::string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer, Camera* cam)
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
@@ -65,8 +66,8 @@ void TextureManager::drawTile(std::string id, int margin, int spacing, int x, in
 	srcRect.y = margin + (spacing + height) * currentRow;
 	srcRect.w = destRect.w = width;
 	srcRect.h = destRect.h = height;
-	destRect.x = x;
-	destRect.y = y;
+	destRect.x = x - cam->getPosition().m_x;
+	destRect.y = y - cam->getPosition().m_y;
 
 	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
 }

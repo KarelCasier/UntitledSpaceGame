@@ -4,6 +4,8 @@
 
 #include <vector>
 #include "GameObject.h"
+#include "Camera.h"
+#include "Player.h"
 
 class PlayState : public GameState
 {
@@ -20,4 +22,10 @@ private:
 	static const std::string s_playID;
 
 	std::vector<GameObject*> mGameObjects;
+
+	Camera* WorldCamera;
+	Camera* UICamera;
+
+	Vector2D testLoc;
+	Player * mpPlayer;
 };

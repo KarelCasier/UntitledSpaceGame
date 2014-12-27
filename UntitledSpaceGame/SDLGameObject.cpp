@@ -16,13 +16,9 @@ mAcceleration(0.f, 0.f)
 	mCurrentFrame = 1;
 }
 
-void SDLGameObject::draw()
+void SDLGameObject::draw(Camera* cam)
 {
-	//Flip texture depending on the direction moving
-	//if (mVelocity.getX() > 0)
-		TheTextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(), mWidth, mHeight, mCurrentRow, mCurrentFrame, TheGame::Instance()->getRenderer(), 0, 255);
-	//else
-	//	TheTextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(), mWidth, mHeight, mCurrentRow, mCurrentFrame, TheGame::Instance()->getRenderer(), 0, 255, SDL_FLIP_HORIZONTAL);
+	TheTextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(), mWidth, mHeight, mCurrentRow, mCurrentFrame, TheGame::Instance()->getRenderer(), 0, 255, cam, SDL_FLIP_NONE);
 }
 
 void SDLGameObject::update(Uint32 dTime)

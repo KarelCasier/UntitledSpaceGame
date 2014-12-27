@@ -60,6 +60,7 @@ private:
 	void onMouseButtonDown(SDL_Event& e);
 	void onMouseButtonUp(SDL_Event& e);
 
+	Vector2D prevCamPos;
 
 	static InputHandler* s_pInstance;
 };

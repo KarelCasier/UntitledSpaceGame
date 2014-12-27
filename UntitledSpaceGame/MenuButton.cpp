@@ -7,9 +7,9 @@ MenuButton::MenuButton(const LoaderParams* pParams, void (*callback)())
 	mCurrentFrame = MOUSE_OUT;
 }
 
-void MenuButton::draw()
+void MenuButton::draw(Camera* cam)
 {
-	SDLGameObject::draw();
+	SDLGameObject::draw(cam);
 }
 
 void MenuButton::update(Uint32 dTime)

@@ -1,5 +1,6 @@
 #include "InputHandler.h"
 #include <iostream>
+#include "Camera.h"
 
 InputHandler* InputHandler::s_pInstance = 0;
 

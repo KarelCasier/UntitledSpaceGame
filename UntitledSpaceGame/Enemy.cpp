@@ -5,9 +5,9 @@ Enemy::Enemy(const LoaderParams* pParams)
 {
 }
 
-void Enemy::draw()
+void Enemy::draw(Camera* cam)
 {
-	SDLGameObject::draw();
+	SDLGameObject::draw(cam);
 }
 
 void Enemy::update(Uint32 dTime)

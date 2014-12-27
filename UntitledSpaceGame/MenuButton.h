@@ -11,7 +11,7 @@ public:
 
 	MenuButton(const LoaderParams* pParams, void (*callback)());
 
-	virtual void draw();
+	virtual void draw(Camera* cam);
 	virtual void update(Uint32 dTime);
 	virtual void clean();
 

@@ -28,7 +28,7 @@ void MenuState::render()
 		{
 			if (mGameObjects[i] != 0)
 			{
-				mGameObjects[i]->draw();
+				mGameObjects[i]->draw(UICamera);
 			}
 		}
 	}
@@ -39,6 +39,8 @@ bool MenuState::onEnter()
 	std::cout << "Entering MenuState" << std::endl;
 	int windowWidth = TheGame::Instance()->getWidth();
 	int windowHeight = TheGame::Instance()->getHeight();
+	//Create Camera
+	UICamera = new Camera;
 
 	//~~~~~~~~~~~~~~~~~~~~~~Load resources~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Title
@@ -67,6 +69,7 @@ bool MenuState::onExit()
 	TheTextureManager::Instance()->clearFromTextureMap("PlayButton");
 	TheTextureManager::Instance()->clearFromTextureMap("ExitButton");
 	TheInputHandler::Instance()->reset();
+	delete UICamera;
 	return true;
 }
 

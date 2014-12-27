@@ -7,9 +7,9 @@ Player::Player(const LoaderParams* pParams)
 
 }
 
-void Player::draw()
+void Player::draw(Camera* cam)
 {
-	SDLGameObject::draw();
+	SDLGameObject::draw(cam);
 }
 
 void Player::update(Uint32 dTime)

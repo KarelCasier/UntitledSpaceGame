@@ -20,6 +20,8 @@ private:
 
 	std::vector<GameObject*> mGameObjects;
 
+	Camera* UICamera;
+
 	//callback functions
 	static void resumePlay();
 	static void pauseToMain();
