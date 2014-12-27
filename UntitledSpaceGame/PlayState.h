@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Player.h"
+#include "Layer.h"
 
 class PlayState : public GameState
 {
@@ -19,9 +20,19 @@ public:
 	virtual std::string getStateID() const { return s_playID; }
 
 private:
+
+	enum LAYERS
+	{
+		Backdrop,
+		Game,
+		Forground,
+		UI,
+		NumberOfLayers
+	};
+
 	static const std::string s_playID;
 
-	std::vector<GameObject*> mGameObjects;
+	std::vector<Layer*> mLayers;
 
 	Camera* WorldCamera;
 	Camera* UICamera;

@@ -73,6 +73,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Layer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Layer.h" />
     <ClInclude Include="LoaderParams.h" />
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="MenuState.h" />

@@ -15,17 +15,11 @@ void PlayState::update(Uint32 dTime)
 	//std::cout << "Camera: [" << WorldCamera->getPosition().m_x << "," << WorldCamera->getPosition().m_y << "]" << std::endl;
 	//WorldCamera->setTarget(&testLoc);
 	//std::cout << "Location: <" << TheCamera::Instance()->getPosition().m_x << "," << TheCamera::Instance()->getPosition().m_y << ">" << std::endl;
-
-	if (!mGameObjects.empty())
+	for (int i = 0; i < NumberOfLayers; i++)
 	{
-		for (int i = 0; i < mGameObjects.size(); i++)
-		{
-			if (mGameObjects[i] != 0)
-			{
-				mGameObjects[i]->update(dTime);
-			}
-		}
+		mLayers[i]->update(dTime);
 	}
+	
 	//Position Camera after updating location to avoid jittering
 	Vector2D pos( 
 		mpPlayer->getPosition().m_x - (TheGame::Instance()->getWidth() / 2) + (mpPlayer->getWidth() / 2),
@@ -36,15 +30,9 @@ void PlayState::update(Uint32 dTime)
 
 void PlayState::render()
 {
-	if (!mGameObjects.empty())
+	for (int i = 0; i < NumberOfLayers; i++)
 	{
-		for (int i = 0; i < mGameObjects.size(); i++)
-		{
-			if (mGameObjects[i] != 0)
-			{
-				mGameObjects[i]->draw();
-			}
-		}
+		mLayers[i]->draw();
 	}
 }
 
@@ -55,11 +43,18 @@ bool PlayState::onEnter()
 	WorldCamera = new Camera;
 	UICamera = new Camera;
 
+	//Set up Layers
+	for (int i = 0; i < NumberOfLayers; i++)
+	{
+		mLayers.push_back(new Layer());
+	}
+
 	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", TheGame::Instance()->getRenderer());
 
-	mGameObjects.push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player")));
+	mLayers[LAYERS::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player")));
+
 	mpPlayer = new Player(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player"));
-	mGameObjects.push_back(mpPlayer);
+	mLayers[LAYERS::Game]->push_back(mpPlayer);
 
 	return true;
 }
@@ -67,11 +62,10 @@ bool PlayState::onEnter()
 bool PlayState::onExit()
 {
 	std::cout << "Exiting PlayState" << std::endl;
-	for (int i = 0; i < mGameObjects.size(); i++)
+	for (int i = 0; i < NumberOfLayers; i++)
 	{
-		mGameObjects[i]->clean();
+		mLayers[i]->clean();
 	}
-	mGameObjects.clear();
 	TheTextureManager::Instance()->clearFromTextureMap("Player");
 	TheInputHandler::Instance()->reset();
 	delete UICamera;
