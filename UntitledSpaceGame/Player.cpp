@@ -27,28 +27,28 @@ void Player::handleInput()
 
 	}
 
-	//Move to mouse position
-	Vector2D* mousePos = TheInputHandler::Instance()->getMousePosition(mCamera);
-
-	mVelocity = (*mousePos - mPosition) / 10;
 
 
 	//Keyboard Input
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
 	{
-		mVelocity.setX(2);
+		rotate(mRotationSpeed);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
 	{
-		mVelocity.setX(-2);
+		rotate(-mRotationSpeed);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
 	{
-		mVelocity.setY(-2);
+		fireEngine(true);
+	}
+	else
+	{
+		fireEngine(false);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
 	{
-		mVelocity.setY(2);
+	 //mVelocity.setY(2);
 	}
 
 
