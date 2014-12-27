@@ -8,6 +8,9 @@ const std::string MenuState::s_menuID = "MENU";
 
 void MenuState::update(Uint32 dTime)
 {
+	Vector2D *mosPos = TheInputHandler::Instance()->getMousePosition(UICamera);
+	//std::cout << "[" << mosPos->getX() << "," << mosPos->getY() << "]" << std::endl;
+
 	if (!mGameObjects.empty())
 	{
 		for (int i = 0; i < mGameObjects.size(); i++)

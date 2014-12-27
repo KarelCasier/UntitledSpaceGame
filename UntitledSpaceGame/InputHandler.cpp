@@ -116,7 +116,7 @@ void InputHandler::onMouseMove(SDL_Event& e)
 Vector2D* InputHandler::getMousePosition(Camera* camera)
 {
 	relativeMousePosition->m_x = mMousePosition->getX() + camera->getPosition().m_x;
-	relativeMousePosition->m_x = mMousePosition->getY() + camera->getPosition().m_x;
+	relativeMousePosition->m_y = mMousePosition->getY() + camera->getPosition().m_y;
 	return relativeMousePosition;
 }
 

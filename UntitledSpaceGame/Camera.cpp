@@ -2,14 +2,13 @@
 #include "Game.h"
 
 Camera::Camera()
-:mTarget(0)
+:mTarget(NULL)
 ,mPosition(0,0)
 {
 }
 
 Camera::~Camera()
 {
-	delete mTarget;
 }
 const Vector2D Camera::getPosition() const
 {

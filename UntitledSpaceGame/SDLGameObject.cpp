@@ -30,5 +30,4 @@ void SDLGameObject::update(Uint32 dTime)
 
 void SDLGameObject::clean()
 {
-	delete mCamera;
 }

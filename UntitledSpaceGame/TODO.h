@@ -3,7 +3,6 @@
 
 ~~~~~~~~~~~~~~~~~~TO-DOs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Bugs:
-	- Mouse Position in relation to the camera
 
 Incomplete:
 
