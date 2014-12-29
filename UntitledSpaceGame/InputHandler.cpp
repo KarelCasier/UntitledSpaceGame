@@ -148,9 +148,9 @@ bool InputHandler::isKeyDown(SDL_Scancode key)
 
 void InputHandler::reset()
 {
-	for (bool state : mMouseButtonStates)
+	for (int i = 0; i < mMouseButtonStates.size(); i++)
 	{
-		state = false;
+		mMouseButtonStates[i] = false;
 	}
 }
 

@@ -81,7 +81,11 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SDLGameObject.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="SimplexNoise.cpp" />
+    <ClCompile Include="Starfield.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Universe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -96,12 +100,17 @@
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="SimplexNoise.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SDLGameObject.h" />
+    <ClInclude Include="Star.h" />
+    <ClInclude Include="Starfield.h" />
+    <ClInclude Include="StarfieldSequence.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TODO.h" />
-    <ClInclude Include="UniverseGenerator.h" />
+    <ClInclude Include="Universe.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

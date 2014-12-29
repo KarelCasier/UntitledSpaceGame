@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Player.h"
 #include "Layer.h"
+#include "Universe.h"
 
 class PlayState : public GameState
 {
@@ -37,6 +38,7 @@ private:
 	Camera* WorldCamera;
 	Camera* UICamera;
 
-	Vector2D testLoc;
+	Universe* mUniverse;
+
 	Player * mpPlayer;
 };

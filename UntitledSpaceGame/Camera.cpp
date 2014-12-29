@@ -10,7 +10,7 @@ Camera::Camera()
 Camera::~Camera()
 {
 }
-const Vector2D Camera::getPosition() const
+Vector2D Camera::getPosition()
 {
 	if (mTarget != 0)
 	{

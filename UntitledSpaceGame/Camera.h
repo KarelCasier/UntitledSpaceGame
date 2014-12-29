@@ -11,7 +11,7 @@ public:
 	void setTarget(Vector2D* target) { mTarget = target; }
 	void setPosition(Vector2D position) { mPosition = position; }
 
-	const Vector2D getPosition() const;
+	Vector2D getPosition();
 private:
 
 	//Camera Target

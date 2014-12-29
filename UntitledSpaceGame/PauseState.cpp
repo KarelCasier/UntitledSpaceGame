@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "MenuButton.h"
+#include "InputHandler.h"
 
 const std::string PauseState::s_pauseID = "PAUSE";
 
@@ -16,6 +17,11 @@ void PauseState::update(Uint32 dTime)
 				mGameObjects[i]->update(dTime);
 			}
 		}
+	}
+
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
+	{
+		TheGame::Instance()->getStateMachine()->popState();
 	}
 }
 

@@ -11,10 +11,9 @@ void PlayState::update(Uint32 dTime)
 	{
 		TheGame::Instance()->getStateMachine()->pushState(new PauseState());
 	}
-	//std::cout << "Player: [" << mpPlayer->getPosition().getX() << "," << mpPlayer->getPosition().getY() << "]" << std::endl;
-	//std::cout << "Camera: [" << WorldCamera->getPosition().m_x << "," << WorldCamera->getPosition().m_y << "]" << std::endl;
-	//WorldCamera->setTarget(&testLoc);
-	//std::cout << "Location: <" << TheCamera::Instance()->getPosition().m_x << "," << TheCamera::Instance()->getPosition().m_y << ">" << std::endl;
+
+	mUniverse->update(dTime);
+
 	for (int i = 0; i < NumberOfLayers; i++)
 	{
 		mLayers[i]->update(dTime);
@@ -30,6 +29,8 @@ void PlayState::update(Uint32 dTime)
 
 void PlayState::render()
 {
+	mUniverse->draw();
+
 	for (int i = 0; i < NumberOfLayers; i++)
 	{
 		mLayers[i]->draw();
@@ -48,6 +49,8 @@ bool PlayState::onEnter()
 	{
 		mLayers.push_back(new Layer());
 	}
+
+	mUniverse = new Universe(WorldCamera,1234);
 
 	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", TheGame::Instance()->getRenderer());
 

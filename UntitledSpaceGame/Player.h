@@ -1,7 +1,7 @@
 #pragma once
-#include "SDLGameObject.h"
+#include "Ship.h"
 
-class Player : public SDLGameObject
+class Player : public Ship
 {
 public:
 

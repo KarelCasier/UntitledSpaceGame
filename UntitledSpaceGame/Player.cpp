@@ -2,7 +2,7 @@
 #include "InputHandler.h"
 
 Player::Player(Camera* camera, const LoaderParams* pParams)
-: SDLGameObject(camera, pParams)
+: Ship(camera, pParams)
 {
 
 }
@@ -17,7 +17,7 @@ void Player::update(Uint32 dTime)
 	//mAcceleration.setX(1);
 	//mCurrentFrame = int(((SDL_GetTicks() / 100) % 6));
 	handleInput();
-	SDLGameObject::update(dTime);
+	Ship::update(dTime);
 }
 
 void Player::handleInput()

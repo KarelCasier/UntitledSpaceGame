@@ -14,15 +14,14 @@ public:
 	virtual void update(Uint32 dTime);
 	virtual void clean();
 
-	void fireEngine(bool bState);
-	void rotate(float radAngle);
-
 	Vector2D getPosition() { return mPosition; }
 	Camera* getCamera() { return mCamera; }
 	void setCamera(Camera* camera) { mCamera = camera; }
 
 	int getWidth() { return mWidth; }
 	int getHeight() { return mHeight; }
+
+	void rotate(float radAngle);
 
 protected:
 
@@ -32,16 +31,12 @@ protected:
 	int mCurrentFrame;
 	Camera* mCamera;
 	std::string mTextureID;
-	int mRotation;
-	int mRotationSpeed;
 	
 	Vector2D mPosition;
 	Vector2D mVelocity;
 	Vector2D mAcceleration;
-	float mDecay;
-	float mMaxSpeed;
-	float mMass;
-	float mEngineThrust;
-	bool bEnginesFireing;
+
+	int mRotation;
+	int mRotationSpeed;
 };
 
