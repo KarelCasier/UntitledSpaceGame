@@ -5,12 +5,13 @@
 Starfield::Starfield(Camera* camera, int seed)
 :pCamera(camera)
 , dis(0.0,1.0)
+, screenWidth(TheGame::Instance()->getWidth())
+, screenHeight(TheGame::Instance()->getHeight())
 {
 	pRand = new std::mt19937(0);
 	//Set up quadrants
 	quadrantWidth = 500;
 	quadrantHeight = 500;
-	centerOfCamera = Vector2D(pCamera->getPosition().getX() + TheGame::Instance()->getWidth() / 2, pCamera->getPosition().getY() + TheGame::Instance()->getWidth() / 2);
 }
 
 void Starfield::draw()
@@ -19,32 +20,26 @@ void Starfield::draw()
 	{ //Repeat for every quad
 		for (int j = 0; j < quadrantsLoaded[i]->stars.size(); j++)
 		{ //Every star in every quad
-			quadrantsLoaded[i]->stars[j]->draw();
+			Vector2D starPos = quadrantsLoaded[i]->stars[j]->getPosition();
+			if (starPos.getX() > (pCamera->getPosition().getX()) &&
+				starPos.getX() < (pCamera->getPosition().getX() + screenWidth) &&
+				starPos.getY() > (pCamera->getPosition().getY()) &&
+				starPos.getY() < (pCamera->getPosition().getY() + screenHeight))
+			{// On screen
+				quadrantsLoaded[i]->stars[j]->draw();
+			}
 		}
 	}
 }
 
 void Starfield::update(Uint32 dTime)
 {
-	centerOfCamera = Vector2D(pCamera->getPosition().getX() + TheGame::Instance()->getWidth() / 2, pCamera->getPosition().getY() + TheGame::Instance()->getHeight() / 2);
-	//for (int i = 0; i < mStars.size(); i++)
-	//{
-	//	if (mStars[i]->getPosition().getX() < pCamera->getPosition().getX() - 50 ||
-	//		mStars[i]->getPosition().getX() > pCamera->getPosition().getX() + TheGame::Instance()->getWidth() + 50 ||
-	//		mStars[i]->getPosition().getY() < pCamera->getPosition().getY() - 50 ||
-	//		mStars[i]->getPosition().getY() > pCamera->getPosition().getY() + TheGame::Instance()->getHeight() + 50 )
-	//	{
-	//		//Not on screen -> remove star
-	//		//removeStar(mStars[i]);
-	//	}
-	//}
-	//Update quadrants
+	centerOfCamera = Vector2D(pCamera->getPosition().getX() + screenWidth / 2, pCamera->getPosition().getY() + screenHeight / 2);
 	//Determine quadrant in
 	Vector2D pos = toQuadrant(centerOfCamera.getX(), centerOfCamera.getY());
-	//std::cout << "Cam B:[" << centerOfCamera.getX() << "," << centerOfCamera.getY() << "]" << std::endl;
-	//std::cout << "Cam A:[" << pos.getX() << "," << pos.getY() << "]" << std::endl;
 
-	for (int i = -3; i < 2; i++)
+	//Load unloaded quadrants around you
+	for (int i = -3; i < 3; i++)
 	{
 		for (int j = -2; j < 2; j++)
 		{
@@ -57,6 +52,7 @@ void Starfield::update(Uint32 dTime)
 	}
 	
 
+	//Unload quadrants not close to you
 	for (int i = 0; i < quadrantsLoaded.size(); i++)
 	{
 		if (std::abs(quadrantsLoaded[i]->position.getX() - pos.getX()) > 3)
@@ -85,8 +81,8 @@ void Starfield::loadQuadrant(int x, int y)
 	Quadrant* newQuad = new Quadrant();
 	newQuad->position = Vector2D(x, y);
 	quadrantsLoaded.push_back(newQuad);
-	std::cout << "Quad:[" << x << "," << y << "] Loaded" << std::endl;
-	int numStarsAttempt = 100;
+	//std::cout << "Quad:[" << x << "," << y << "] Loaded" << std::endl;
+	int numStarsAttempt = 50;
 
 	
 	for (int i = 0; i < numStarsAttempt; i++)
@@ -94,13 +90,15 @@ void Starfield::loadQuadrant(int x, int y)
 		int starX = (newQuad->position.getX() + (dis(*pRand))) * quadrantWidth;
 		int starY = (newQuad->position.getY() + (dis(*pRand))) * quadrantHeight;
 
-		float danger = scaled_octave_noise_2d(3, .5, 10, 0.0, 1.0, starX/100, starY/100);
-		if (danger < .999)
+		float danger = scaled_octave_noise_2d(3, .5, 10, 0.0, 1.0, starX, starY);
+		if (danger < .4)
 		{
 			newQuad->stars.push_back(new Star(pCamera, new LoaderParams(
-				starX,
-				starY,
-				20, 20, "Star", .1), 1));
+				starX, //X-Pos
+				starY, //Y-Pos
+				20, 20, "Star",
+				(dis(*pRand))/3 //Scale
+				), 1));
 		}
 	}
 }
@@ -117,7 +115,7 @@ void Starfield::unloadQuadrant(int x, int y)
 			quadrantsLoaded[i]->stars.clear();
 			delete quadrantsLoaded[i];
 			quadrantsLoaded.erase(quadrantsLoaded.begin() + i);
-			std::cout << "Quad:[" << x << "," << y << "] Unloaded" << std::endl;
+			//std::cout << "Quad:[" << x << "," << y << "] Unloaded" << std::endl;
 		}
 	}
 }

@@ -36,6 +36,7 @@ public:
 
 
 private:
+	int screenWidth, screenHeight;
 	std::vector<Quadrant*> quadrantsLoaded;
 	int quadrantWidth, quadrantHeight;
 	Camera* pCamera;
