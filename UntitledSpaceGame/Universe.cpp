@@ -7,7 +7,8 @@ Universe::Universe(Camera* camera,int seed)
 :pCamera(camera)
 ,mStarfield(camera, seed)
 {
-	
+	pRand = new std::mt19937(0);
+	TheTextureManager::Instance()->load("Assets/Star.png", "Star", TheGame::Instance()->getRenderer());
 }
 
 void Universe::draw()
@@ -17,5 +18,7 @@ void Universe::draw()
 
 void Universe::update(Uint32 dTime)
 {
+	//Generate new stars
+
 	mStarfield.update(dTime);
 }

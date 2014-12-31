@@ -27,7 +27,7 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
 	return false;
 }
 
-void TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, Camera* cam, SDL_RendererFlip flip)
+void TextureManager::draw(std::string id, int x, int y, int width, int height, float scale, SDL_Renderer* pRenderer, Camera* cam, SDL_RendererFlip flip)
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
@@ -42,14 +42,16 @@ void TextureManager::draw(std::string id, int x, int y, int width, int height, S
 	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
-void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer *pRenderer, double angle, int alpha, Camera* cam, SDL_RendererFlip flip)
+void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, float scale, int currentRow, int currentFrame, SDL_Renderer *pRenderer, double angle, int alpha, Camera* cam, SDL_RendererFlip flip)
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
 	srcRect.x = width * (currentFrame-1);
 	srcRect.y = height * (currentRow-1);
-	srcRect.w = destRect.w = width;
-	srcRect.h = destRect.h = height;
+	srcRect.w =  width;
+	srcRect.h =  height;
+	destRect.w = width * scale;
+	destRect.h = height * scale;
 	destRect.x = x - cam->getPosition().m_x;
 	destRect.y = y - cam->getPosition().m_y;
 	//SDL_SetTextureBlendMode(m_textureMap[id], SDL_BLENDMODE_BLEND);

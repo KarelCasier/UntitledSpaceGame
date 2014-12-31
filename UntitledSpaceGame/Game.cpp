@@ -30,18 +30,18 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	// attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		std::cout << "SDL Initialized!\n";
+		//std::cout << "SDL Initialized!\n";
 		// initialize the window
 		m_pWindow = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 
 		if (m_pWindow != 0) // window init success
 		{
-			std::cout << "window creation success\n";
+			//std::cout << "window creation success\n";
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED);
 
 			if (m_pRenderer != 0) // renderer init success
 			{
-				std::cout << "renderer creation success\n";
+				//std::cout << "renderer creation success\n";
 				SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 			}
 			else
@@ -106,7 +106,7 @@ SDL_Quit();
 
 void Game::render()
 {
-	SDL_SetRenderDrawColor(m_pRenderer, 50, 50, 50, 255);
+	SDL_SetRenderDrawColor(m_pRenderer, 17, 14, 35, 255);
 	SDL_RenderClear(m_pRenderer);
 
 	mpGameStateMachine->render();

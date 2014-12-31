@@ -54,9 +54,9 @@ bool PlayState::onEnter()
 
 	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", TheGame::Instance()->getRenderer());
 
-	mLayers[LAYERS::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player")));
+	mLayers[LAYERS::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player",1)));
 
-	mpPlayer = new Player(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player"));
+	mpPlayer = new Player(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player",1));
 	mLayers[LAYERS::Game]->push_back(mpPlayer);
 
 	return true;

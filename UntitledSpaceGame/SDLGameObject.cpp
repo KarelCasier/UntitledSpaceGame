@@ -14,16 +14,18 @@ mCamera(camera)
 	mWidth = pParams->getWidth();
 	mHeight = pParams->getHeight();
 	mTextureID = pParams->getTextureID();
+	mScale = pParams->getScale();
 	mCurrentRow = 1;
 	mCurrentFrame = 1;
 
 	mRotation = 0;
 	mRotationSpeed = 2;
+	mAlpha = 255; //Full opacity
 }
 
 void SDLGameObject::draw()
 {
-	TheTextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(), mWidth, mHeight, mCurrentRow, mCurrentFrame, TheGame::Instance()->getRenderer(), mRotation, 255, mCamera, SDL_FLIP_NONE);
+	TheTextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(), mWidth, mHeight, mScale, mCurrentRow, mCurrentFrame, TheGame::Instance()->getRenderer(), mRotation, mAlpha, mCamera, SDL_FLIP_NONE);
 }
 
 void SDLGameObject::update(Uint32 dTime)

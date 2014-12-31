@@ -2,8 +2,7 @@
 #include <random>
 
 #include "Vector2D.h"
-#include "SimplexNoise.h"
-#include "StarfieldSequence.h"
+#include "Starfield.h"
 
 class Universe
 {
@@ -16,7 +15,9 @@ public:
 private:
 	int mSeed;
 
-	StarfieldSequence mStarfield;
+	Starfield mStarfield;
 	Camera* pCamera;
+
+	std::mt19937 * pRand;
 
 };

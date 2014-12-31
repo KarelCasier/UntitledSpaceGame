@@ -140,8 +140,5 @@
     <ClInclude Include="Starfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StarfieldSequence.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

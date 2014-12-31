@@ -107,7 +107,6 @@
     <ClInclude Include="SDLGameObject.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="Starfield.h" />
-    <ClInclude Include="StarfieldSequence.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TODO.h" />
     <ClInclude Include="Universe.h" />

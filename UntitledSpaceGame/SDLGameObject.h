@@ -21,6 +21,12 @@ public:
 	int getWidth() { return mWidth; }
 	int getHeight() { return mHeight; }
 
+	float getAlpha() { return (float)mAlpha/255.f; }
+	void setAlpha(float between0and1) { mAlpha = (int)(between0and1 * 255); }
+
+	float getScale() { return mScale; }
+	void setScale(float scale) { mScale = scale; }
+
 	void rotate(float radAngle);
 
 protected:
@@ -29,14 +35,16 @@ protected:
 	int mHeight;
 	int mCurrentRow;
 	int mCurrentFrame;
+	int mAlpha;
+	float mScale;
+	int mRotation;
+	int mRotationSpeed;
+
 	Camera* mCamera;
 	std::string mTextureID;
 	
 	Vector2D mPosition;
 	Vector2D mVelocity;
 	Vector2D mAcceleration;
-
-	int mRotation;
-	int mRotationSpeed;
 };
 
