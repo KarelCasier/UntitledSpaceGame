@@ -34,6 +34,8 @@ public:
 	void unloadQuadrant(int x, int y);
 	Vector2D toQuadrant(int x, int y);
 
+	void clean();
+
 
 private:
 	int screenWidth, screenHeight;

@@ -25,6 +25,8 @@ void PlayState::update(Uint32 dTime)
 		mpPlayer->getPosition().m_y - (TheGame::Instance()->getHeight() / 2) + (mpPlayer->getHeight() / 2)
 		);
 	WorldCamera->setPosition(pos); //Center Camera on player
+
+	
 }
 
 void PlayState::render()
@@ -69,9 +71,40 @@ bool PlayState::onExit()
 	{
 		mLayers[i]->clean();
 	}
+	mUniverse->clean();
 	TheTextureManager::Instance()->clearFromTextureMap("Player");
 	TheInputHandler::Instance()->reset();
 	delete UICamera;
-	delete WorldCamera;;
+	delete WorldCamera;
+	delete mUniverse;
+	return true;
+}
+
+bool PlayState::checkCollision(SDLGameObject* o1, SDLGameObject* o2)
+{
+	int leftA, leftB;
+	int rightA, rightB;
+	int topA, topB;
+	int bottomA, bottomB;
+
+	//Calculate the sides of rect A
+	leftA = o1->getPosition().getX();
+	rightA = o1->getPosition().getX() + o1->getWidth();
+	topA = o1->getPosition().getY();
+	bottomA = o1->getPosition().getY() + o1->getHeight();
+
+	//Calculate the sides of rect B
+	leftB = o2->getPosition().getX();
+	rightB = o2->getPosition().getX() + o2->getWidth();
+	topB = o2->getPosition().getY();
+	bottomB = o2->getPosition().getY() + o2->getHeight();
+
+	//If any of the sides from A are outside of B
+	if (bottomA <= topB){ return false; }
+	if (topA >= bottomB){ return false; }
+	if (rightA <= leftB){ return false; }
+	if (leftA >= rightB){ return false; }
+
+	//Else collision
 	return true;
 }

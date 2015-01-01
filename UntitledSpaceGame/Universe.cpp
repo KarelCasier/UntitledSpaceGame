@@ -22,3 +22,9 @@ void Universe::update(Uint32 dTime)
 
 	mStarfield.update(dTime);
 }
+
+void Universe::clean()
+{
+	mStarfield.clean();
+	TheTextureManager::Instance()->clearFromTextureMap("Star");
+}

@@ -12,6 +12,8 @@ public:
 	void draw();
 	void update(Uint32 dTime);
 
+	void clean();
+
 private:
 	int mSeed;
 

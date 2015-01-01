@@ -14,7 +14,7 @@ public:
 	virtual void update(Uint32 dTime);
 	virtual void clean();
 
-	Vector2D getPosition() { return mPosition; }
+	Vector2D& getPosition() { return mPosition; }
 	Camera* getCamera() { return mCamera; }
 	void setCamera(Camera* camera) { mCamera = camera; }
 

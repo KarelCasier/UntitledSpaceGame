@@ -124,3 +124,11 @@ Vector2D Starfield::toQuadrant(int x, int y)
 {
 	return Vector2D(static_cast<int>(std::floor(x / quadrantWidth)), static_cast<int>(std::floor(y / quadrantHeight)));
 }
+
+void Starfield::clean()
+{
+	while (!quadrantsLoaded.empty())
+	{
+		unloadQuadrant(quadrantsLoaded[0]->position.getX(), quadrantsLoaded[0]->position.getY());
+	}
+}

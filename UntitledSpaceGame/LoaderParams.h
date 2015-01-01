@@ -12,7 +12,8 @@ public:
 		OBJECT
 	};
 
-	LoaderParams(int x, int y, int width, int height, std::string textureID, float scale = 1.0, TAG tag = TAG::DEFAULT) : mX(x), mY(y), mWidth(width), mHeight(height), mTextureID(textureID), mScale(scale), mTag(tag)
+	LoaderParams(int x, int y, int width, int height, std::string textureID, float scale = 1.0, TAG tag = TAG::DEFAULT) 
+		: mX(x), mY(y), mWidth(width), mHeight(height), mTextureID(textureID), mScale(scale), mTag(tag)
 	{
 	}
 	int getX() const { return mX; }

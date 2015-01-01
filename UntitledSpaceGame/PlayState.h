@@ -20,6 +20,8 @@ public:
 
 	virtual std::string getStateID() const { return s_playID; }
 
+	bool checkCollision(SDLGameObject* object1, SDLGameObject* object2);
+
 private:
 
 	enum LAYERS
