@@ -6,7 +6,7 @@
 
 const std::string GameOverState::s_gameOverID = "GAMEOVER";
 
-void GameOverState::update(Uint32 dTime)
+bool GameOverState::update(Uint32 dTime)
 {
 	if (!mGameObjects.empty())
 	{
@@ -23,6 +23,7 @@ void GameOverState::update(Uint32 dTime)
 	{
 		//TheGame::Instance()->getStateMachine()->popState();
 	}
+	return true;
 }
 
 void GameOverState::render()

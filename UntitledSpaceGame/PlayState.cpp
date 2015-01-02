@@ -5,7 +5,7 @@
 
 const std::string PlayState::s_playID = "PLAY";
 
-void PlayState::update(Uint32 dTime)
+bool PlayState::update(Uint32 dTime)
 {
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
@@ -24,9 +24,10 @@ void PlayState::update(Uint32 dTime)
 		mpPlayer->getPosition().m_x - (TheGame::Instance()->getWidth() / 2) + (mpPlayer->getWidth() / 2),
 		mpPlayer->getPosition().m_y - (TheGame::Instance()->getHeight() / 2) + (mpPlayer->getHeight() / 2)
 		);
+
 	WorldCamera->setPosition(pos); //Center Camera on player
 
-	
+	return false;
 }
 
 void PlayState::render()

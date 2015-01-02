@@ -15,6 +15,7 @@ mCamera(camera)
 	mHeight = pParams->getHeight();
 	mTextureID = pParams->getTextureID();
 	mScale = pParams->getScale();
+	mTag = pParams->getTag();
 	mCurrentRow = 1;
 	mCurrentFrame = 1;
 

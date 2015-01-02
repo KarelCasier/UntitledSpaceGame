@@ -2,13 +2,13 @@
 
 void GameStateMachine::clean()
 {
-	if (!mGameStates.empty())
+	while (!mGameStates.empty())
 	{
 		mGameStates.back()->onExit();
 
 		delete mGameStates.back();
 
-		mGameStates.clear();
+		mGameStates.erase(mGameStates.end());
 	}
 }
 
@@ -24,6 +24,10 @@ void GameStateMachine::render()
 {
 	if (!mGameStates.empty())
 	{
+		//for (GameState* state : mGameStates)
+		{
+			//state->render();
+		}
 		mGameStates.back()->render();
 	}
 }
@@ -56,6 +60,7 @@ void GameStateMachine::changeState(GameState *pState)
 
 		mGameStates.back()->onExit();
 		mGameStates.pop_back();
+		//clean();
 	}
 
 	// initialise it

@@ -7,8 +7,8 @@ public:
 
 	Player(Camera* camera, const LoaderParams* pParams);
 
-	void draw();
-	void update(Uint32 dTime);
+	virtual void draw();
+	virtual void update(Uint32 dTime);
 	void handleInput();
-	void clean();
+	virtual void clean();
 };

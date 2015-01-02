@@ -10,6 +10,7 @@ void Layer::clean()
 	for (int i = 0; i < mGameObjects.size(); i++)
 	{
 		mGameObjects[i]->clean();
+		delete mGameObjects[i];
 	}
 	mGameObjects.clear();
 }

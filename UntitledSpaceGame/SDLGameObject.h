@@ -18,6 +18,8 @@ public:
 	Camera* getCamera() { return mCamera; }
 	void setCamera(Camera* camera) { mCamera = camera; }
 
+	void setVelocity(Vector2D& vel) { mVelocity = vel; }
+
 	int getWidth() { return mWidth; }
 	int getHeight() { return mHeight; }
 
@@ -29,6 +31,8 @@ public:
 
 	void rotate(float radAngle);
 
+	LoaderParams::TAG getTag() { return mTag; }
+
 protected:
 
 	int mWidth;
@@ -39,6 +43,8 @@ protected:
 	float mScale;
 	int mRotation;
 	int mRotationSpeed;
+
+	LoaderParams::TAG mTag;
 
 	Camera* mCamera;
 	std::string mTextureID;

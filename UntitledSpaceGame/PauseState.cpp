@@ -6,7 +6,7 @@
 
 const std::string PauseState::s_pauseID = "PAUSE";
 
-void PauseState::update(Uint32 dTime)
+bool PauseState::update(Uint32 dTime)
 {
 	if (!mGameObjects.empty())
 	{
@@ -23,6 +23,7 @@ void PauseState::update(Uint32 dTime)
 	{
 		TheGame::Instance()->getStateMachine()->popState();
 	}
+	return false; //Game paused -> don't update states below
 }
 
 void PauseState::render()

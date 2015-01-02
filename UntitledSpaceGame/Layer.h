@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include <vector>
+
 class Layer
 {
 public:
@@ -12,8 +13,6 @@ public:
 	void clean();
 
 	void push_back(GameObject* object);
-
-
 
 	std::vector<GameObject*> mGameObjects;
 };

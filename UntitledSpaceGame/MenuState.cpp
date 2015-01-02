@@ -6,7 +6,7 @@
 
 const std::string MenuState::s_menuID = "MENU";
 
-void MenuState::update(Uint32 dTime)
+bool MenuState::update(Uint32 dTime)
 {
 	Vector2D *mosPos = TheInputHandler::Instance()->getMousePosition(UICamera);
 	//std::cout << "[" << mosPos->getX() << "," << mosPos->getY() << "]" << std::endl;
@@ -21,6 +21,7 @@ void MenuState::update(Uint32 dTime)
 			}
 		}
 	}
+	return false;
 }
 
 void MenuState::render()

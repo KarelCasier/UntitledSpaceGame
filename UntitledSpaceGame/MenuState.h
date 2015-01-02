@@ -8,7 +8,7 @@
 class MenuState : public GameState
 {
 public:
-	virtual void update(Uint32 dTime);
+	virtual bool update(Uint32 dTime);
 	virtual void render();
 
 	virtual bool onEnter();

@@ -8,7 +8,7 @@
 class GameState
 {
 public:
-	virtual void update(Uint32 dTime) = 0;
+	virtual bool update(Uint32 dTime) = 0;
 	virtual void render() = 0;
 
 	virtual bool onEnter() = 0;

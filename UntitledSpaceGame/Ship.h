@@ -3,6 +3,9 @@
 #include "LoaderParams.h"
 #include "Vector2D.h"
 #include "Camera.h"
+#include "Projectile.h"
+#include <vector>
+#include "Timer.h"
 
 class Ship : public SDLGameObject
 {
@@ -15,6 +18,9 @@ public:
 	virtual void clean();
 
 	void fireEngine(bool bState);
+	void fireGun();
+
+	void reload();
 
 protected:
 
@@ -23,5 +29,14 @@ protected:
 	float mMass;
 	float mEngineThrust;
 	bool bEnginesFireing;
+	bool bReloaded;
+
+
+	int reloadTime;
+	Timer reloadTimer;
+
+	int mHitpoints;
+
+	std::vector<Projectile*> mProjectiles;
 };
 

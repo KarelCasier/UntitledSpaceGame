@@ -9,7 +9,7 @@ Player::Player(Camera* camera, const LoaderParams* pParams)
 
 void Player::draw()
 {
-	SDLGameObject::draw();
+	Ship::draw();
 }
 
 void Player::update(Uint32 dTime)
@@ -27,18 +27,23 @@ void Player::handleInput()
 
 	}
 
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
+	{
+		fireGun();
+	}
+
 
 
 	//Keyboard Input
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) || TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_D))
 	{
 		rotate(mRotationSpeed);
 	}
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT) || TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_A))
 	{
 		rotate(-mRotationSpeed);
 	}
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) || TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_W))
 	{
 		fireEngine(true);
 	}
