@@ -30,6 +30,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	// attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
+		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 1);
 		//std::cout << "SDL Initialized!\n";
 		// initialize the window
 		m_pWindow = SDL_CreateWindow(title, xpos, ypos, width, height, flags);

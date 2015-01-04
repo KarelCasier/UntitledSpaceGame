@@ -20,14 +20,18 @@ public:
 
 	void setVelocity(Vector2D& vel) { mVelocity = vel; }
 
-	int getWidth() { return mWidth; }
-	int getHeight() { return mHeight; }
+	int getWidth() { return mScaledWidth; }
+	int getHeight() { return mScaledHeight; }
 
 	float getAlpha() { return (float)mAlpha/255.f; }
 	void setAlpha(float between0and1) { mAlpha = (int)(between0and1 * 255); }
 
 	float getScale() { return mScale; }
-	void setScale(float scale) { mScale = scale; }
+	void setScale(float scale) {
+		mScale = scale;
+		mScaledWidth = mWidth * mScale;
+		mScaledHeight = mHeight * mScale;
+	}
 
 	void rotate(float radAngle);
 
@@ -37,6 +41,8 @@ protected:
 
 	int mWidth;
 	int mHeight;
+	int mScaledWidth;
+	int mScaledHeight;
 	int mCurrentRow;
 	int mCurrentFrame;
 	int mAlpha;

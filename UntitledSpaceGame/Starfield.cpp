@@ -91,7 +91,7 @@ void Starfield::loadQuadrant(int x, int y)
 		int starY = (newQuad->position.getY() + (dis(*pRand))) * quadrantHeight;
 
 		float danger = scaled_octave_noise_2d(4, .2, 10, 0.0, 1.0, starX, starY);
-		if (danger < .4)
+		if (danger < .3)
 		{
 			newQuad->stars.push_back(new Star(pCamera, new LoaderParams(
 				starX, //X-Pos

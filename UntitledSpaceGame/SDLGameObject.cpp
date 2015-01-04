@@ -19,6 +19,9 @@ mCamera(camera)
 	mCurrentRow = 1;
 	mCurrentFrame = 1;
 
+	mScaledWidth = mWidth * mScale;
+	mScaledHeight = mHeight * mScale;
+
 	mRotation = 0;
 	mRotationSpeed = 2;
 	mAlpha = 255; //Full opacity
