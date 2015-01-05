@@ -12,19 +12,18 @@ bool PlayState::update(Uint32 dTime)
 		TheGame::Instance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	mUniverse->update(dTime);
-
 	for (int i = 0; i < NumberOfLayers; i++)
 	{
 		mLayers[i]->update(dTime);
 	}
 	
-	//Position Camera after updating location to avoid jittering
+	//Position Camera after updating location to avoid jitter of plane
 	Vector2D pos( 
 		mpPlayer->getPosition().m_x - (TheGame::Instance()->getWidth() / 2) + (mpPlayer->getWidth() / 2),
 		mpPlayer->getPosition().m_y - (TheGame::Instance()->getHeight() / 2) + (mpPlayer->getHeight() / 2)
 		);
 
+	mUniverse->update(dTime);
 	WorldCamera->setPosition(pos); //Center Camera on player
 
 	return false;
@@ -62,6 +61,12 @@ bool PlayState::onEnter()
 	mpPlayer = new Player(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player", 1));
 	mLayers[LAYERS::Game]->push_back(mpPlayer);
 
+	//Setup camera
+	Vector2D pos(
+		mpPlayer->getPosition().m_x - (TheGame::Instance()->getWidth() / 2) + (mpPlayer->getWidth() / 2),
+		mpPlayer->getPosition().m_y - (TheGame::Instance()->getHeight() / 2) + (mpPlayer->getHeight() / 2)
+		);
+	WorldCamera->setPosition(pos); //Center Camera on player
 	return true;
 }
 

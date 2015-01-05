@@ -97,8 +97,10 @@ void Starfield::loadQuadrant(int x, int y)
 				starX, //X-Pos
 				starY, //Y-Pos
 				20, 20, "Star",
-				(dis(*pRand))/3 //Scale
+				(dis(*pRand))/1 //Scale
 				), 1));
+
+			newQuad->stars.back()->setAlpha(1 / danger);
 		}
 	}
 }
