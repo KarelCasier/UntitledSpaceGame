@@ -15,6 +15,7 @@ public:
 	virtual void clean();
 
 	Vector2D& getPosition() { return mPosition; }
+
 	Camera* getCamera() { return mCamera; }
 	void setCamera(Camera* camera) { mCamera = camera; }
 
@@ -32,6 +33,9 @@ public:
 		mScaledWidth = mWidth * mScale;
 		mScaledHeight = mHeight * mScale;
 	}
+
+	int getRotation() { return mRotation; }
+	void setRotation(int newRotation) { mRotation = newRotation; }
 
 	void rotate(float radAngle);
 

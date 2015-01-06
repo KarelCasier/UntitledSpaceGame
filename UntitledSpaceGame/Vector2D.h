@@ -28,6 +28,8 @@ public:
     
     void setX(float x) { m_x = x; }
     void setY(float y) { m_y = y; }
+
+
     
     float length() { return std::sqrt(m_x * m_x + m_y * m_y); }
     

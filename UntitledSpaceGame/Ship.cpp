@@ -16,10 +16,16 @@ SDLGameObject(camera, pParams)
 	reloadTime = 1 * 60; //1 second
 	bReloaded = true;
 	TheTextureManager::Instance()->load("Assets/Bullet.png", "Bullet", TheGame::Instance()->getRenderer());
+	pParticleSystem = new ParticleSystem(camera, this);
 }
 
 void Ship::draw()
 {
+	if (pParticleSystem)
+	{
+		pParticleSystem->draw();
+	}
+
 	for (int i = 0; i < mProjectiles.size();i++)
 	{
 		
@@ -31,6 +37,11 @@ void Ship::draw()
 
 void Ship::update(Uint32 dTime)
 {
+	if (pParticleSystem)
+	{
+		pParticleSystem->update(dTime);
+	}
+
 	if (bEnginesFireing)
 	{
 		float fAccel = mEngineThrust / mMass;
@@ -86,6 +97,10 @@ void Ship::reload()
 
 void Ship::clean()
 {
+	if (pParticleSystem)
+	{
+		pParticleSystem->clean();
+	}
 	for (int i = 0; i < mProjectiles.size(); i++)
 	{
 		mProjectiles[i]->clean();

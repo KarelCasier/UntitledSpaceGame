@@ -82,7 +82,7 @@ void Starfield::loadQuadrant(int x, int y)
 	newQuad->position = Vector2D(x, y);
 	quadrantsLoaded.push_back(newQuad);
 	//std::cout << "Quad:[" << x << "," << y << "] Loaded" << std::endl;
-	int numStarsAttempt = 50;
+	int numStarsAttempt = 100;
 
 	
 	for (int i = 0; i < numStarsAttempt; i++)
