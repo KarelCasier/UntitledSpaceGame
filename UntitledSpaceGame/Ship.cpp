@@ -5,7 +5,8 @@
 
 
 Ship::Ship(Camera* camera, const LoaderParams* pParams) :
-SDLGameObject(camera, pParams)
+SDLGameObject(camera, pParams),
+mLightTrail(this, camera)
 {
 
 	bEnginesFireing = false;
@@ -16,15 +17,12 @@ SDLGameObject(camera, pParams)
 	reloadTime = 1 * 60; //1 second
 	bReloaded = true;
 	TheTextureManager::Instance()->load("Assets/Bullet.png", "Bullet", TheGame::Instance()->getRenderer());
-	pParticleSystem = new ParticleSystem(camera, this);
+	//pParticleSystem = new ParticleSystem(camera, this);
 }
 
 void Ship::draw()
 {
-	if (pParticleSystem)
-	{
-		pParticleSystem->draw();
-	}
+	mLightTrail.draw();
 
 	for (int i = 0; i < mProjectiles.size();i++)
 	{
@@ -37,10 +35,7 @@ void Ship::draw()
 
 void Ship::update(Uint32 dTime)
 {
-	if (pParticleSystem)
-	{
-		pParticleSystem->update(dTime);
-	}
+	mLightTrail.update();
 
 	if (bEnginesFireing)
 	{
@@ -97,10 +92,8 @@ void Ship::reload()
 
 void Ship::clean()
 {
-	if (pParticleSystem)
-	{
-		pParticleSystem->clean();
-	}
+	mLightTrail.clean();
+
 	for (int i = 0; i < mProjectiles.size(); i++)
 	{
 		mProjectiles[i]->clean();

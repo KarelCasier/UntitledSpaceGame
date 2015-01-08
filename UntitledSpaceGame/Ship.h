@@ -6,7 +6,8 @@
 #include "Projectile.h"
 #include <vector>
 #include "Timer.h"
-#include "ParticleSystem.h"
+//#include "ParticleSystem.h"
+#include "LightTrail.h"
 
 class Ship : public SDLGameObject
 {
@@ -37,7 +38,9 @@ protected:
 	Timer reloadTimer;
 
 	int mHitpoints;
-	ParticleSystem* pParticleSystem;
+	LightTrail mLightTrail;
+	//ParticleSystem* pParticleSystem;
+
 
 	std::vector<Projectile*> mProjectiles;
 };

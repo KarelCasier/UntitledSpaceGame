@@ -78,6 +78,15 @@ public:
         return *this;
     }
 
+	bool operator!=(Vector2D& vec)
+	{
+		if (m_x == vec.getX() && m_y == vec.getY())
+		{
+			return true;
+		}
+		return false;
+	}
+
     
     void normalize()
     {

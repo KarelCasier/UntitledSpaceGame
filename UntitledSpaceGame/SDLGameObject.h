@@ -15,6 +15,7 @@ public:
 	virtual void clean();
 
 	Vector2D& getPosition() { return mPosition; }
+	Vector2D* getCenteredPosition() { return new Vector2D(mPosition.getX() + mScaledWidth / 2, mPosition.getY() + mScaledWidth / 2); }
 
 	Camera* getCamera() { return mCamera; }
 	void setCamera(Camera* camera) { mCamera = camera; }
