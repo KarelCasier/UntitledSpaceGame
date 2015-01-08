@@ -89,6 +89,23 @@ void Ship::reload()
 	reloadTimer.stop();
 }
 
+Vector2D* Ship::getEnginePosition()
+{
+	int rotation = (getRotation()) * M_PI / 180;
+	Vector2D toCenter(getWidth() / 2, getHeight() / 2);
+	Vector2D* positionOffset = new Vector2D(getHeight() / 3 * std::cos((mRotation + 90)*(M_PI / 180)), getHeight() / 3 * std::sin((mRotation + 90)*(M_PI / 180)));
+	//Vector2D* temp = new Vector2D(positionOffset->getX(), positionOffset->getY());
+	//positionOffset->setX(temp->getX() * std::cosf(rotation) - temp->getY() * std::sinf(rotation));
+	//positionOffset->setY(temp->getX() * std::sinf(rotation) + temp->getY() * std::cosf(rotation));
+	
+	//Vector2D* finalPositionOffset = new Vector2D(positionOffset->getX() * std::cosf(rotation) - positionOffset->getY() * std::sinf(rotation), positionOffset->getY() * std::cosf(rotation) + positionOffset->getX() * std::sinf(rotation));
+	*positionOffset += getPosition();
+	*positionOffset += toCenter;
+	//*positionOffset += *finalPositionOffset;
+	//delete finalPositionOffset;
+
+	return positionOffset;
+}
 
 void Ship::clean()
 {

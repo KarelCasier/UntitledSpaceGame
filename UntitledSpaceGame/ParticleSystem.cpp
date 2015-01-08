@@ -24,14 +24,16 @@ void ParticleSystem::update(Uint32 dTime)
 {
 	if (mSpawnTimer.getTicks() >= mSpawnTime)
 	{
-		int rotation = pTarget->getRotation() * M_PI / 180;
+		Vector2D* pos;
 
-		Vector2D spawnPos = pTarget->getPosition() + Vector2D(pTarget->getWidth() / 2 - 5, pTarget->getHeight() / 2 - 5);
-		Vector2D moveSpawn = Vector2D(0, pTarget->getHeight() / 2.7);
-
-		//Rotate vector
-		float xpos = moveSpawn.getX() * std::cos(rotation) - moveSpawn.getY() * std::sin(rotation);
-		float ypos = moveSpawn.getY() * std::cos(rotation) + moveSpawn.getX() * std::sin(rotation);
+		if (dynamic_cast<Ship*>(pTarget))
+		{
+			pos = static_cast<Ship*>(pTarget)->getEnginePosition();
+		}
+		else
+		{
+			pos = pTarget->getCenteredPosition();//new Vector2D(pTarget->getPosition());
+		}
 
 		//x = ((x - x_origin) * cos(angle)) - ((y_origin - y) * sin(angle)) + x_origin
 		//y = ((y_origin - y) * cos(angle)) - ((x - x_origin) * sin(angle)) + y_origin
@@ -40,9 +42,11 @@ void ParticleSystem::update(Uint32 dTime)
 
 		//Spawn new particle
 		Particle* newParticle = new Particle(pCamera, new LoaderParams(
-			spawnPos.getX() + xpos,
-			spawnPos.getY() + ypos,
+			pos->getX(),
+			pos->getY(),
 			10, 10, "Particle", 1), 10* 60);
+
+		delete pos;
 
 		newParticle->setRotation(pTarget->getRotation());
 

@@ -22,6 +22,8 @@ public:
 	void fireEngine(bool bState);
 	void fireGun();
 
+	Vector2D* getEnginePosition();
+
 	void reload();
 
 protected:

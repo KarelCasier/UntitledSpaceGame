@@ -34,7 +34,14 @@ void LightTrail::draw()
 
 Vector2D* LightTrail::getNewPos()
 {
-	return pTarget->getCenteredPosition();//new Vector2D(pTarget->getPosition());
+	if (dynamic_cast<Ship*>(pTarget))
+	{
+		return static_cast<Ship*>(pTarget)->getEnginePosition();
+	}
+	else
+	{
+		pTarget->getCenteredPosition();//new Vector2D(pTarget->getPosition());
+	}
 }
 
 void LightTrail::update()
