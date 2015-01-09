@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include <vector>
 #include "Camera.h"
+#include "Universe.h"
 
 class MenuState : public GameState
 {
@@ -22,6 +23,12 @@ private:
 	std::vector<GameObject*> mGameObjects;
 
 	Camera *UICamera;
+	Camera *BackgroundCamera;
+
+	Universe* backgroundUniverse;
+
+	Vector2D moveCamera;
+
 
 	//callback functions
 	static void menuToPlay();

@@ -19,6 +19,9 @@ mCamera(camera)
 	mCurrentRow = 1;
 	mCurrentFrame = 1;
 
+	mDecay = 0.9;
+	bHasFriction = false;
+
 	mScaledWidth = mWidth * mScale;
 	mScaledHeight = mHeight * mScale;
 
@@ -34,7 +37,14 @@ void SDLGameObject::draw()
 
 void SDLGameObject::update(Uint32 dTime)
 {
+
+	if (hasFriction())
+	{
+		mAcceleration *= mDecay;
+		mVelocity *= ((1 - mDecay) / 1.1 + mDecay);
+	}
 	mVelocity += mAcceleration;
+	
 	mPosition += mVelocity*(dTime/60.f);
 }
 

@@ -6,7 +6,7 @@
 #include "Projectile.h"
 #include <vector>
 #include "Timer.h"
-//#include "ParticleSystem.h"
+#include "ParticleSystem.h"
 #include "LightTrail.h"
 
 class Ship : public SDLGameObject
@@ -28,7 +28,6 @@ public:
 
 protected:
 
-	float mDecay;
 	float mMaxSpeed;
 	float mMass;
 	float mEngineThrust;
@@ -41,7 +40,7 @@ protected:
 
 	int mHitpoints;
 	LightTrail mLightTrail;
-	//ParticleSystem* pParticleSystem;
+	ParticleSystem* pParticleSystem;
 
 
 	std::vector<Projectile*> mProjectiles;

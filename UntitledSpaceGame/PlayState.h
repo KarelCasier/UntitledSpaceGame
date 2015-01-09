@@ -38,9 +38,11 @@ private:
 	std::vector<Layer*> mLayers;
 
 	Camera* WorldCamera;
+	Camera* ParalaxCamera;
 	Camera* UICamera;
 
-	Universe* mUniverse;
+	Universe* mUniverseLayerTop;
+	Universe* mUniverseLayerBot;
 
 	Player * mpPlayer;
 };

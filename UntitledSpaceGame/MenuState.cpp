@@ -21,11 +21,18 @@ bool MenuState::update(Uint32 dTime)
 			}
 		}
 	}
+	moveCamera += Vector2D(-1, 1);
+	BackgroundCamera->setPosition(moveCamera);
+
+	backgroundUniverse->update(dTime);
+
 	return false;
 }
 
 void MenuState::render()
 {
+	backgroundUniverse->draw();
+
 	if (!mGameObjects.empty())
 	{
 		for (int i = 0; i < mGameObjects.size(); i++)
@@ -45,6 +52,9 @@ bool MenuState::onEnter()
 	int windowHeight = TheGame::Instance()->getHeight();
 	//Create Camera
 	UICamera = new Camera;
+	BackgroundCamera = new Camera;
+
+	backgroundUniverse = new Universe(BackgroundCamera, 1234);
 
 	//~~~~~~~~~~~~~~~~~~~~~~Load resources~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Title

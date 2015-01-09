@@ -42,9 +42,12 @@ void ParticleSystem::update(Uint32 dTime)
 
 		//Spawn new particle
 		Particle* newParticle = new Particle(pCamera, new LoaderParams(
-			pos->getX(),
-			pos->getY(),
+			pos->getX()-5,
+			pos->getY()-5,
 			10, 10, "Particle", 1), 10* 60);
+		float ejectSpeed = -10.0;
+		newParticle->setVelocity(Vector2D(ejectSpeed* std::cos((pTarget->getRotation() - 90)*(M_PI / 180)), ejectSpeed* std::sin((pTarget->getRotation() - 90)*(M_PI / 180))));
+		newParticle->enableFriction(true);
 
 		delete pos;
 

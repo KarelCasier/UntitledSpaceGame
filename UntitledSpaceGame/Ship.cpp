@@ -9,20 +9,21 @@ SDLGameObject(camera, pParams),
 mLightTrail(this, camera)
 {
 
+	enableFriction(true);
 	bEnginesFireing = false;
-	mDecay = 0.9;
 	mEngineThrust = 20;
 	mMass = 100;
 	mMaxSpeed = 20;
 	reloadTime = 1 * 60; //1 second
 	bReloaded = true;
 	TheTextureManager::Instance()->load("Assets/Bullet.png", "Bullet", TheGame::Instance()->getRenderer());
-	//pParticleSystem = new ParticleSystem(camera, this);
+	pParticleSystem = new ParticleSystem(camera, this);
 }
 
 void Ship::draw()
 {
-	mLightTrail.draw();
+	//mLightTrail.draw();
+	pParticleSystem->draw();
 
 	for (int i = 0; i < mProjectiles.size();i++)
 	{
@@ -36,18 +37,13 @@ void Ship::draw()
 void Ship::update(Uint32 dTime)
 {
 	mLightTrail.update();
+	pParticleSystem->update(dTime);
 
 	if (bEnginesFireing)
 	{
 		float fAccel = mEngineThrust / mMass;
 		Vector2D accel(fAccel* std::cos((mRotation - 90)*(M_PI / 180)), fAccel* std::sin((mRotation - 90)*(M_PI / 180)));
 		mAcceleration = accel;
-	}
-	else
-	{
-		//Vector2D accel(mDecay, mDecay);
-		mAcceleration *= mDecay;
-		mVelocity *= ((1 - mDecay) / 1.1 + mDecay);
 	}
 
 	for (Projectile * projectile : mProjectiles)
@@ -110,7 +106,7 @@ Vector2D* Ship::getEnginePosition()
 void Ship::clean()
 {
 	mLightTrail.clean();
-
+	pParticleSystem->clean();
 	for (int i = 0; i < mProjectiles.size(); i++)
 	{
 		mProjectiles[i]->clean();

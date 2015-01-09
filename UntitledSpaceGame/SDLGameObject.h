@@ -35,6 +35,9 @@ public:
 		mScaledHeight = mHeight * mScale;
 	}
 
+	bool hasFriction() { return bHasFriction; }
+	void enableFriction(bool state) { bHasFriction = state; }
+
 	int getRotation() { return mRotation; }
 	void setRotation(int newRotation) { mRotation = newRotation; }
 
@@ -62,6 +65,8 @@ protected:
 	
 	Vector2D mPosition;
 	Vector2D mVelocity;
+	float mDecay;
+	bool bHasFriction;
 	Vector2D mAcceleration;
 };
 

@@ -21,7 +21,7 @@ void LightTrail::draw()
 	if (mPrevPositions.size() < 4)
 		return;
 
-	SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 0xFF, 0xFF, 0x00, 0xFF);
+	SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 142, 226, 255, 0xFF);
 	for (int i = 0; i <= mPrevPositions.size() - 2; i++)
 	{
 		SDL_RenderDrawLine(TheGame::Instance()->getRenderer(),
@@ -46,7 +46,7 @@ Vector2D* LightTrail::getNewPos()
 
 void LightTrail::update()
 {
-	if (mPrevPositions.size() < 100)
+	if (mPrevPositions.size() < 50)
 	{
 		//Fill initial positions
 
