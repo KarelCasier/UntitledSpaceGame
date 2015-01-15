@@ -1,12 +1,15 @@
 #include "PlayState.h"
 #include "InputHandler.h"
 #include "Game.h"
+#include "ProjectileManager.h"
 
 
 const std::string PlayState::s_playID = "PLAY";
 
 bool PlayState::update(Uint32 dTime)
 {
+	TheProjectileManager::Instance()->update(dTime);
+
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
 		TheGame::Instance()->getStateMachine()->pushState(new PauseState());
@@ -41,6 +44,8 @@ void PlayState::render()
 	{
 		mLayers[i]->draw();
 	}
+
+	TheProjectileManager::Instance()->draw();
 }
 
 bool PlayState::onEnter()
@@ -87,6 +92,7 @@ bool PlayState::onExit()
 	mUniverseLayerBot->clean();
 	TheTextureManager::Instance()->clearFromTextureMap("Player");
 	TheInputHandler::Instance()->reset();
+	TheProjectileManager::Instance()->clean();
 	delete UICamera;
 	delete WorldCamera;
 	delete mUniverseLayerTop;

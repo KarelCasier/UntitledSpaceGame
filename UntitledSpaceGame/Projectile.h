@@ -25,6 +25,6 @@ public:
 private:
 
 	Type mType;
-
+	Camera* pCamera;
 
 };

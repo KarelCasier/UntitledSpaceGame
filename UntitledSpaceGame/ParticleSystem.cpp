@@ -2,10 +2,12 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include <math.h>
+#include "Ship.h"
 
-ParticleSystem::ParticleSystem(Camera* camera, SDLGameObject* target)
+ParticleSystem::ParticleSystem(Camera* camera, SDLGameObject* target, Ship::Engine enignePosition)
 :pCamera(camera)
 , pTarget(target)
+, mEnginePositon(enignePosition)
 {
 	mSpawnTime = 1;
 	TheTextureManager::Instance()->load("Assets/Particle.png", "Particle", TheGame::Instance()->getRenderer());
@@ -22,13 +24,13 @@ void ParticleSystem::draw()
 
 void ParticleSystem::update(Uint32 dTime)
 {
-	if (mSpawnTimer.getTicks() >= mSpawnTime)
+	if (mSpawnTimer.getTicks() >= mSpawnTime && isEnabled())
 	{
 		Vector2D* pos;
 
 		if (dynamic_cast<Ship*>(pTarget))
 		{
-			pos = static_cast<Ship*>(pTarget)->getEnginePosition();
+			pos = static_cast<Ship*>(pTarget)->getEnginePosition(mEnginePositon);
 		}
 		else
 		{

@@ -21,10 +21,7 @@ void Starfield::draw()
 		for (int j = 0; j < quadrantsLoaded[i]->stars.size(); j++)
 		{ //Every star in every quad
 			Vector2D starPos = quadrantsLoaded[i]->stars[j]->getPosition();
-			if (starPos.getX() > (pCamera->getPosition().getX()-5) &&
-				starPos.getX() < (pCamera->getPosition().getX() + screenWidth) &&
-				starPos.getY() > (pCamera->getPosition().getY()-5) &&
-				starPos.getY() < (pCamera->getPosition().getY() + screenHeight))
+			if (pCamera->isOnSrceen(starPos))
 			{// On screen
 				quadrantsLoaded[i]->stars[j]->draw();
 			}
@@ -82,7 +79,7 @@ void Starfield::loadQuadrant(int x, int y)
 	newQuad->position = Vector2D(x, y);
 	quadrantsLoaded.push_back(newQuad);
 	//std::cout << "Quad:[" << x << "," << y << "] Loaded" << std::endl;
-	int numStarsAttempt = 50;
+	int numStarsAttempt = 30;
 
 	
 	for (int i = 0; i < numStarsAttempt; i++)

@@ -30,3 +30,15 @@ void Camera::update(Vector2D velocity)
 		//mPosition.m_x = 0;
 	}
 }
+
+bool Camera::isOnSrceen(Vector2D position)
+{
+	if (position.getX() >(getPosition().getX() - 10) && //Buffer of 10 px
+		position.getX() < (getPosition().getX() + TheGame::Instance()->getWidth()) &&
+		position.getY() > (getPosition().getY() - 10) &&
+		position.getY() < (getPosition().getY() + TheGame::Instance()->getHeight()))
+	{
+		return true;
+	}
+	return false;
+}

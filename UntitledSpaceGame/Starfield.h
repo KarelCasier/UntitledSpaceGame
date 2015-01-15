@@ -19,16 +19,6 @@ public:
 	void draw();
 	void update(Uint32 dTime);
 
-	//std::vector<Star*> getStarfield(){ return mStars; }
-
-	//void AddStar(Star* star) { mStars.push_back(star); }
-	//Star* GetStar(int i) { return mStars[i]; }
-	//void removeStar(Star* star) { 
-		//Find and remove star
-		//auto iter = std::remove(mStars.begin(), mStars.end(), star);
-		//delete *iter;
-		//mStars.erase(iter, mStars.end());
-	//}
 	void loadQuadrant(int x, int y);
 	bool checkQuadrantState(int x, int y);
 	void unloadQuadrant(int x, int y);

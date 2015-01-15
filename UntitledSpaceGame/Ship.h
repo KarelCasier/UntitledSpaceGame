@@ -6,12 +6,22 @@
 #include "Projectile.h"
 #include <vector>
 #include "Timer.h"
-#include "ParticleSystem.h"
+
 #include "LightTrail.h"
+
+class ParticleSystem;
 
 class Ship : public SDLGameObject
 {
 public:
+
+	enum Engine
+	{
+		CENTER,
+		LEFT,
+		RIGHT
+	};
+
 	Ship(Camera* camera, const LoaderParams* pParams);
 
 
@@ -22,7 +32,7 @@ public:
 	void fireEngine(bool bState);
 	void fireGun();
 
-	Vector2D* getEnginePosition();
+	Vector2D* getEnginePosition(Engine pos);
 
 	void reload();
 
@@ -40,9 +50,7 @@ protected:
 
 	int mHitpoints;
 	LightTrail mLightTrail;
-	ParticleSystem* pParticleSystem;
-
-
-	std::vector<Projectile*> mProjectiles;
+	ParticleSystem* pParticleSystemLeft;
+	ParticleSystem* pParticleSystemRight;
 };
 

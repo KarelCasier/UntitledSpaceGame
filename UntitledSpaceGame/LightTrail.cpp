@@ -36,7 +36,7 @@ Vector2D* LightTrail::getNewPos()
 {
 	if (dynamic_cast<Ship*>(pTarget))
 	{
-		return static_cast<Ship*>(pTarget)->getEnginePosition();
+		return static_cast<Ship*>(pTarget)->getEnginePosition(Ship::CENTER);
 	}
 	else
 	{
