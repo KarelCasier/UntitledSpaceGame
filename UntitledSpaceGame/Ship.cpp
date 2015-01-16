@@ -16,7 +16,7 @@ mLightTrail(this, camera)
 	mEngineThrust = 20;
 	mMass = 100;
 	mMaxSpeed = 20;
-	reloadTime = 1 * 60; //1 second
+	reloadTime = 1 * 60;
 	bReloaded = true;
 	pParticleSystemLeft = new ParticleSystem(camera, this, Engine::LEFT);
 	pParticleSystemRight = new ParticleSystem(camera, this, Engine::RIGHT);
@@ -95,8 +95,7 @@ Vector2D* Ship::getEnginePosition(Engine pos)
 	int rotation = (getRotation()) * M_PI / 180;
 	Vector2D toCenter(getWidth() / 2, getHeight() / 2);
 
-	Vector2D* positionOffset = new Vector2D();
-	delete positionOffset;
+	Vector2D* positionOffset;
 	if (pos == Engine::CENTER)
 	{
 		positionOffset = new Vector2D(
@@ -114,6 +113,11 @@ Vector2D* Ship::getEnginePosition(Engine pos)
 		positionOffset = new Vector2D(
 			getHeight() / 2.5 * std::cos((mRotation + 90)*(M_PI / 180)) + getWidth() / 5.3 * std::sin((mRotation + 90)*(M_PI / 180)),
 			getHeight() / 2.5 * std::sin((mRotation + 90)*(M_PI / 180)) - getWidth() / 5.3 * std::cos((mRotation + 90)*(M_PI / 180)));
+	}
+	else
+	{
+		std::cout << "Error, non existant engine position" << std::endl;
+		exit(1);
 	}
 	
 	//Vector2D* temp = new Vector2D(positionOffset->getX(), positionOffset->getY());

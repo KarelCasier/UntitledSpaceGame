@@ -15,7 +15,7 @@ bool PlayState::update(Uint32 dTime)
 		TheGame::Instance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	for (int i = 0; i < NumberOfLayers; i++)
+	for (int i = 0; i < Layer::NumberOfLayers; i++)
 	{
 		mLayers[i]->update(dTime);
 	}
@@ -32,6 +32,9 @@ bool PlayState::update(Uint32 dTime)
 	WorldCamera->setPosition(pos); //Center Camera on player
 	ParalaxCamera->setPosition(WorldCamera->getPosition() / 2);
 
+	//check Collisions
+	mLayers[Layer::Game]->handleCollisions();
+
 	return false;
 }
 
@@ -40,7 +43,7 @@ void PlayState::render()
 	mUniverseLayerBot->draw();
 	mUniverseLayerTop->draw();
 
-	for (int i = 0; i < NumberOfLayers; i++)
+	for (int i = 0; i < Layer::NumberOfLayers; i++)
 	{
 		mLayers[i]->draw();
 	}
@@ -57,7 +60,7 @@ bool PlayState::onEnter()
 	UICamera = new Camera;
 
 	//Set up Layers
-	for (int i = 0; i < NumberOfLayers; i++)
+	for (int i = 0; i < Layer::NumberOfLayers; i++)
 	{
 		mLayers.push_back(new Layer());
 	}
@@ -70,7 +73,7 @@ bool PlayState::onEnter()
 	//mLayers[LAYERS::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player",1)));
 
 	mpPlayer = new Player(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player", 1));
-	mLayers[LAYERS::Game]->push_back(mpPlayer);
+	mLayers[Layer::Game]->push_back(mpPlayer);
 
 	//Setup camera
 	Vector2D pos(
@@ -84,7 +87,7 @@ bool PlayState::onEnter()
 bool PlayState::onExit()
 {
 	std::cout << "Exiting PlayState" << std::endl;
-	for (int i = 0; i < NumberOfLayers; i++)
+	for (int i = 0; i < Layer::NumberOfLayers; i++)
 	{
 		mLayers[i]->clean();
 	}

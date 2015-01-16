@@ -1,4 +1,6 @@
 #include "Layer.h"
+#include "CollisionHandler.h"
+#include "ProjectileManager.h"
 
 void Layer::push_back(GameObject* object)
 {
@@ -38,6 +40,22 @@ void Layer::draw()
 			if (mGameObjects[i] != 0)
 			{
 				mGameObjects[i]->draw();
+			}
+		}
+	}
+}
+
+void Layer::handleCollisions()
+{
+	std::vector<Projectile*>& pProjectiles = TheProjectileManager::Instance()->getProjectiles();
+
+	for (int i = 0; i < pProjectiles.size(); i++)
+	{ //Loop though all bullets
+		for (int j = 0; j < mGameObjects.size(); j++)
+		{
+			if (checkCollision(pProjectiles.at(i), dynamic_cast<SDLGameObject*>(mGameObjects.at(j))))
+			{
+				std::cout << "Bullet COllision!" << std::endl;
 			}
 		}
 	}

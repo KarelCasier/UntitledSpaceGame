@@ -26,5 +26,6 @@ private:
 
 	Type mType;
 	Camera* pCamera;
+	bool isDeleting;
 
 };

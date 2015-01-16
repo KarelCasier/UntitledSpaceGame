@@ -20,10 +20,12 @@ void ProjectileManager::draw()
 
 void ProjectileManager::update(Uint32 dTime)
 {
-	for (Projectile* projectile : mProjectiles)
+	//for (Projectile* projectile : mProjectiles)
+	for (int i = 0; i < mProjectiles.size(); i++)
 	{
-		projectile->update(dTime);
+		mProjectiles.at(i)->update(dTime);
 	}
+	destroyProjectilesInQueue();
 }
 
 void ProjectileManager::addProjectile(Projectile* projectile)
@@ -33,14 +35,42 @@ void ProjectileManager::addProjectile(Projectile* projectile)
 
 void ProjectileManager::destroyProjectile(Projectile* projectile)
 {
-	//Find and remove projectile
-	auto iter = std::remove(mProjectiles.begin(), mProjectiles.end(), projectile);
-	delete *iter;
-	mProjectiles.erase(iter, mProjectiles.end());
+	//Find, remove, add projectile to the remove queue
+	//auto iter = std::remove(mProjectiles.begin(), mProjectiles.end(), projectile);
+	//mProjectilesToDestroy.push(*iter);
+	//mProjectiles.erase(iter, mProjectiles.end());
+
+	for (int i = 0; i < mProjectiles.size(); i++)
+	{
+		if (mProjectiles.at(i) == projectile)
+		{
+			Projectile * toDelete = mProjectiles.at(i);
+			mProjectilesToDestroy.push_back(toDelete);
+			mProjectiles.erase(mProjectiles.begin() + i);
+		}
+	}
+	
+}
+
+void ProjectileManager::destroyProjectilesInQueue()
+{
+	while (!mProjectilesToDestroy.empty())
+	{
+
+		Projectile* toDelete = mProjectilesToDestroy.back();
+		mProjectilesToDestroy.pop_back();
+		if (toDelete != nullptr)
+		{
+			toDelete->clean();
+			delete toDelete;
+			toDelete = nullptr;
+		}
+	}
 }
 
 void ProjectileManager::clean()
 {
+	destroyProjectilesInQueue();
 	for (Projectile* projectile : mProjectiles)
 	{
 		projectile->clean();

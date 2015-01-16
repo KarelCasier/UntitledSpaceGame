@@ -24,15 +24,6 @@ public:
 
 private:
 
-	enum LAYERS
-	{
-		Backdrop,
-		Game,
-		Forground,
-		UI,
-		NumberOfLayers
-	};
-
 	static const std::string s_playID;
 
 	std::vector<Layer*> mLayers;
