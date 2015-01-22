@@ -5,20 +5,18 @@
 #include "ParticleSystem.h"
 #include "ProjectileManager.h"
 
-
 Ship::Ship(Camera* camera, const LoaderParams* pParams) :
 SDLGameObject(camera, pParams),
 mLightTrail(this, camera)
 {
-
 	enableFriction(true);
-	bEnginesFireing = false;
-	mEngineThrust = 20;
-	mMass = 100;
-	mMaxSpeed = 20;
-	reloadTime = 1 * 60;
-	bReloaded = true;
-	pParticleSystemLeft = new ParticleSystem(camera, this, Engine::LEFT);
+	bEnginesFireing      = false;
+	mEngineThrust        = 20;
+	mMass                = 100;
+	mMaxSpeed            = 20;
+	reloadTime           = 1 * 60;
+	bReloaded            = true;
+	pParticleSystemLeft  = new ParticleSystem(camera, this, Engine::LEFT);
 	pParticleSystemRight = new ParticleSystem(camera, this, Engine::RIGHT);
 }
 
@@ -50,7 +48,7 @@ void Ship::update(Uint32 dTime)
 		pParticleSystemLeft->setSpawnState(false);
 		pParticleSystemRight->setSpawnState(false);
 	}
-	
+
 	if (reloadTimer.getTicks() >= reloadTime)
 	{
 		reload();
@@ -75,8 +73,10 @@ void Ship::fireGun()
 
 		Projectile* projectile = new Projectile(mCamera, new LoaderParams(gunPos.getX(), gunPos.getY(), 5, 5, "Bullet", 1, LoaderParams::TAG::ALLIEDBULLET));
 		projectile->setRotation(mRotation);
-		Vector2D bulletVel(50* std::cos((mRotation - 90)*(M_PI / 180)), 50* std::sin((mRotation - 90)*(M_PI / 180)));
+
+		Vector2D bulletVel(50 * std::cos((mRotation - 90)*(M_PI / 180)), 50 * std::sin((mRotation - 90)*(M_PI / 180)));
 		projectile->setVelocity(bulletVel);
+
 		TheProjectileManager::Instance()->addProjectile(projectile);
 
 		bReloaded = false;
@@ -99,7 +99,7 @@ Vector2D* Ship::getEnginePosition(Engine pos)
 	if (pos == Engine::CENTER)
 	{
 		positionOffset = new Vector2D(
-			getHeight() / 3 * std::cos((mRotation + 90)*(M_PI / 180)), 
+			getHeight() / 3 * std::cos((mRotation + 90)*(M_PI / 180)),
 			getHeight() / 3 * std::sin((mRotation + 90)*(M_PI / 180)));
 	}
 	else if (pos == Engine::LEFT)
@@ -119,11 +119,11 @@ Vector2D* Ship::getEnginePosition(Engine pos)
 		std::cout << "Error, non existant engine position" << std::endl;
 		exit(1);
 	}
-	
+
 	//Vector2D* temp = new Vector2D(positionOffset->getX(), positionOffset->getY());
 	//positionOffset->setX(temp->getX() * std::cosf(rotation) - temp->getY() * std::sinf(rotation));
 	//positionOffset->setY(temp->getX() * std::sinf(rotation) + temp->getY() * std::cosf(rotation));
-	
+
 	//Vector2D* finalPositionOffset = new Vector2D(positionOffset->getX() * std::cosf(rotation) - positionOffset->getY() * std::sinf(rotation), positionOffset->getY() * std::cosf(rotation) + positionOffset->getX() * std::sinf(rotation));
 	*positionOffset += getPosition();
 	*positionOffset += toCenter;

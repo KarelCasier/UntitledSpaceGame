@@ -8,7 +8,7 @@ Universe::Universe(Camera* camera,int seed)
 ,mStarfield(camera, seed)
 {
 	pRand = new std::mt19937(0);
-	TheTextureManager::Instance()->load("Assets/StarWAura.png", "Star", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("Assets/Star.png", "Star", TheGame::Instance()->getRenderer());
 }
 
 void Universe::draw()
