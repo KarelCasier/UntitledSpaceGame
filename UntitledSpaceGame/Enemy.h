@@ -12,6 +12,11 @@ public:
 	void computeAI();
 	void clean();
 
+	bool checkTargetinFOV();
+
 private:
 	SDLGameObject* pTarget;
+	Camera* pCamera;
+	Vector2D fovLeft;
+	Vector2D fovRight;
 };
