@@ -72,8 +72,10 @@ bool PlayState::onEnter()
 
 	//mLayers[LAYERS::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player",1)));
 
-	mpPlayer = new Player(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player", 1));
+	mpPlayer = new Player(WorldCamera, new LoaderParams(0, 0, 100, 100, "Player", 1, LoaderParams::ALLIED));
 	mLayers[Layer::Game]->push_back(mpPlayer);
+
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player", 1, LoaderParams::ENEMY), mpPlayer));
 
 	//Setup camera
 	Vector2D pos(

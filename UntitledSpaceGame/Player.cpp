@@ -61,5 +61,5 @@ void Player::handleInput()
 
 void Player::clean()
 {
-
+	Ship::clean();
 }

@@ -32,5 +32,5 @@ void Projectile::draw()
 
 void Projectile::clean()
 {
-
+	SDLGameObject::clean();
 }

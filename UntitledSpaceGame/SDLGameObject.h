@@ -8,6 +8,13 @@ class SDLGameObject : public GameObject
 {
 public:
 	SDLGameObject(Camera* camera, const LoaderParams* pParams);
+
+	struct CollisionBox
+	{
+		Vector2D pos;
+		int width;
+		int height;
+	};
 	
 
 	virtual void draw();
@@ -43,6 +50,9 @@ public:
 
 	void rotate(float radAngle);
 
+	CollisionBox& getCollisionBox() { return mColBox; }
+	void setCollisionBox(CollisionBox newBox) { mColBox = newBox; }
+
 	LoaderParams::TAG getTag() { return mTag; }
 
 protected:
@@ -62,11 +72,13 @@ protected:
 
 	Camera* mCamera;
 	std::string mTextureID;
-	
+
 	Vector2D mPosition;
 	Vector2D mVelocity;
 	float mDecay;
 	bool bHasFriction;
 	Vector2D mAcceleration;
+
+	CollisionBox mColBox;
 };
 

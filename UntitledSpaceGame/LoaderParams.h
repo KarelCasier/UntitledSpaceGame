@@ -9,8 +9,8 @@ public:
 	{
 		DEFAULT,
 		UI,
-		ALLIEDBULLET,
-		ENEMYBULLET
+		ALLIED,
+		ENEMY
 	};
 
 	LoaderParams(int x, int y, int width, int height, std::string textureID, float scale = 1.0, TAG tag = TAG::DEFAULT) 

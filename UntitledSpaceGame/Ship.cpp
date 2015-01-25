@@ -18,6 +18,10 @@ mLightTrail(this, camera)
 	bReloaded            = true;
 	pParticleSystemLeft  = new ParticleSystem(camera, this, Engine::LEFT);
 	pParticleSystemRight = new ParticleSystem(camera, this, Engine::RIGHT);
+
+	mColBox.pos = Vector2D(25, 25);
+	mColBox.height = mHeight - 50;
+	mColBox.width = mWidth - 50;
 }
 
 void Ship::draw()
@@ -71,7 +75,7 @@ void Ship::fireGun()
 		Vector2D positionOffset(-(getHeight() / 3 + 15) * std::cos((mRotation + 90)*(M_PI / 180)), -(getHeight() / 3 + 15) * std::sin((mRotation + 90)*(M_PI / 180)));
 		gunPos += positionOffset;
 
-		Projectile* projectile = new Projectile(mCamera, new LoaderParams(gunPos.getX(), gunPos.getY(), 5, 5, "Bullet", 1, LoaderParams::TAG::ALLIEDBULLET));
+		Projectile* projectile = new Projectile(mCamera, new LoaderParams(gunPos.getX(), gunPos.getY(), 5, 5, "Bullet", 1, LoaderParams::TAG::ALLIED));
 		projectile->setRotation(mRotation);
 
 		Vector2D bulletVel(50 * std::cos((mRotation - 90)*(M_PI / 180)), 50 * std::sin((mRotation - 90)*(M_PI / 180)));
@@ -116,7 +120,7 @@ Vector2D* Ship::getEnginePosition(Engine pos)
 	}
 	else
 	{
-		std::cout << "Error, non existant engine position" << std::endl;
+		std::cout << "Error, non existent engine position" << std::endl;
 		exit(1);
 	}
 
@@ -138,4 +142,6 @@ void Ship::clean()
 	mLightTrail.clean();
 	pParticleSystemLeft->clean();
 	pParticleSystemRight->clean();
+	delete pParticleSystemLeft;
+	delete pParticleSystemRight;
 }

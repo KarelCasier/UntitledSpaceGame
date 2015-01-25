@@ -53,9 +53,12 @@ void Layer::handleCollisions()
 	{ //Loop though all bullets
 		for (int j = 0; j < mGameObjects.size(); j++)
 		{
-			if (checkCollision(pProjectiles.at(i), dynamic_cast<SDLGameObject*>(mGameObjects.at(j))))
+			if ((pProjectiles.at(i))->getTag() != dynamic_cast<SDLGameObject*>(mGameObjects.at(j))->getTag())
 			{
-				std::cout << "Bullet COllision!" << std::endl;
+				if (checkCollision(pProjectiles.at(i), dynamic_cast<SDLGameObject*>(mGameObjects.at(j))))
+				{
+					TheProjectileManager::Instance()->destroyProjectile(pProjectiles.at(i));
+				}
 			}
 		}
 	}

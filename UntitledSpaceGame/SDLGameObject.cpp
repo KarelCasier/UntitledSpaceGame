@@ -19,15 +19,19 @@ mCamera(camera)
 	mCurrentRow = 1;
 	mCurrentFrame = 1;
 
+	mColBox.pos = Vector2D(0, 0);
+	mColBox.width = mWidth;
+	mColBox.height = mHeight;
+
 	mDecay = 0.9;
 	bHasFriction = false;
 
 	mScaledWidth = mWidth * mScale;
 	mScaledHeight = mHeight * mScale;
 
-	mRotation = 0;
+	mRotation      = 0;
 	mRotationSpeed = 2;
-	mAlpha = 255; //Full opacity
+	mAlpha         = 255; //Full opacity
 }
 
 void SDLGameObject::draw()
