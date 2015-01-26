@@ -19,10 +19,6 @@ mCamera(camera)
 	mCurrentRow = 1;
 	mCurrentFrame = 1;
 
-	mColBox.pos = Vector2D(0, 0);
-	mColBox.width = mWidth;
-	mColBox.height = mHeight;
-
 	mDecay = 0.9;
 	bHasFriction = false;
 
@@ -32,6 +28,11 @@ mCamera(camera)
 	mRotation      = 0;
 	mRotationSpeed = 2;
 	mAlpha         = 255; //Full opacity
+
+	//Set up collision box
+	mColBox.pos = Vector2D(0, 0);
+	mColBox.width = getWidth();
+	mColBox.height = getHeight();
 }
 
 void SDLGameObject::draw()

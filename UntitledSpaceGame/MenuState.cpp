@@ -21,7 +21,7 @@ bool MenuState::update(Uint32 dTime)
 			}
 		}
 	}
-	moveCamera += Vector2D(-1, 1);
+	moveCamera += Vector2D(2, -2);
 	BackgroundCamera->setPosition(moveCamera);
 
 	backgroundUniverse->update(dTime);
