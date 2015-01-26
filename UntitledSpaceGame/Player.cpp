@@ -2,7 +2,7 @@
 #include "InputHandler.h"
 
 Player::Player(Camera* camera, const LoaderParams* pParams)
-: Ship(camera, pParams)
+: Ship(camera, pParams, Ship::ShipType::Player)
 {
 
 }

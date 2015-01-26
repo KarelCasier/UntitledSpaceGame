@@ -7,7 +7,8 @@ ProjectileManager* ProjectileManager::s_pInstance = 0;
 
 ProjectileManager::ProjectileManager()
 {
-	TheTextureManager::Instance()->load("Assets/Bullet.png", "Bullet", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("Assets/Bullet1.png", "PlayerBullet", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("Assets/Bullet2.png", "EnemyBullet", TheGame::Instance()->getRenderer());
 }
 
 void ProjectileManager::draw()

@@ -5,9 +5,10 @@
 #include "ParticleSystem.h"
 #include "ProjectileManager.h"
 
-Ship::Ship(Camera* camera, const LoaderParams* pParams) :
+Ship::Ship(Camera* camera, const LoaderParams* pParams, ShipType type) :
 SDLGameObject(camera, pParams),
-mLightTrail(this, camera)
+mLightTrail(this, camera),
+mType(type)
 {
 	enableFriction(true);
 	bEnginesFireing      = false;
@@ -16,8 +17,23 @@ mLightTrail(this, camera)
 	mMaxSpeed            = 20;
 	reloadTime           = 1 * 60;
 	bReloaded            = true;
-	pParticleSystemLeft  = new ParticleSystem(camera, this, Engine::LEFT);
-	pParticleSystemRight = new ParticleSystem(camera, this, Engine::RIGHT);
+	ParticleSystem::ParticleType particleType;
+	if (mType == ShipType::Player)
+	{
+		particleType = ParticleSystem::ParticleType::Player;
+	}
+	else if (mType == ShipType::Enemy)
+	{
+		particleType = ParticleSystem::ParticleType::Enemy;
+	}
+	else
+	{
+		std::cout << "Error in Ship: ShipType undefined" << std::endl;
+	}
+
+	pParticleSystemLeft = new ParticleSystem(camera, this, Engine::LEFT, particleType);
+	pParticleSystemRight = new ParticleSystem(camera, this, Engine::RIGHT, particleType);
+	
 
 	mColBox.pos = Vector2D(25, 25);
 	mColBox.height = mHeight - 50;
@@ -75,7 +91,20 @@ void Ship::fireGun()
 		Vector2D positionOffset(-(getHeight() / 3 + 15) * std::cos((mRotation + 90)*(M_PI / 180)), -(getHeight() / 3 + 15) * std::sin((mRotation + 90)*(M_PI / 180)));
 		gunPos += positionOffset;
 
-		Projectile* projectile = new Projectile(mCamera, new LoaderParams(gunPos.getX(), gunPos.getY(), 5, 5, "Bullet", 1, LoaderParams::TAG::ALLIED));
+		Projectile* projectile = nullptr;
+		
+		if (mType == ShipType::Player)
+		{
+			projectile = new Projectile(mCamera, new LoaderParams(gunPos.getX(), gunPos.getY(), 5, 5, "PlayerBullet", 1, LoaderParams::TAG::ALLIED));
+		}
+		else if (mType == ShipType::Enemy)
+		{
+			projectile = new Projectile(mCamera, new LoaderParams(gunPos.getX(), gunPos.getY(), 5, 5, "EnemyBullet", 1, LoaderParams::TAG::ENEMY));
+		}
+		else
+		{
+			std::cout << "Error in Ship.cpp: ShipType undefined" << std::endl;
+		}
 		projectile->setRotation(mRotation);
 
 		Vector2D bulletVel(50 * std::cos((mRotation - 90)*(M_PI / 180)), 50 * std::sin((mRotation - 90)*(M_PI / 180)));

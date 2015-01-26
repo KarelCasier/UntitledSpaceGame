@@ -15,6 +15,12 @@ class Ship : public SDLGameObject
 {
 public:
 
+	enum ShipType
+	{
+		Player,
+		Enemy
+	};
+
 	enum Engine
 	{
 		CENTER,
@@ -22,7 +28,7 @@ public:
 		RIGHT
 	};
 
-	Ship(Camera* camera, const LoaderParams* pParams);
+	Ship(Camera* camera, const LoaderParams* pParams, ShipType type);
 
 
 	virtual void draw();
@@ -43,6 +49,7 @@ protected:
 	float mEngineThrust;
 	bool bEnginesFireing;
 	bool bReloaded;
+	ShipType mType;
 
 
 	int reloadTime;

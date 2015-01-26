@@ -4,7 +4,7 @@
 #include "Game.h"
 
 Enemy::Enemy(Camera* camera, const LoaderParams* pParams, SDLGameObject* target)
-: Ship(camera, pParams)
+: Ship(camera, pParams, Ship::ShipType::Enemy)
 , pTarget(target)
 , pCamera(camera)
 {

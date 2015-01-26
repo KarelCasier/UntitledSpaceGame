@@ -4,13 +4,15 @@
 #include <math.h>
 #include "Ship.h"
 
-ParticleSystem::ParticleSystem(Camera* camera, SDLGameObject* target, Ship::Engine enignePosition)
+ParticleSystem::ParticleSystem(Camera* camera, SDLGameObject* target, Ship::Engine enignePosition, ParticleType type)
 :pCamera(camera)
 , pTarget(target)
 , mEnginePositon(enignePosition)
+, mType(type)
 {
 	mSpawnTime = 1;
-	TheTextureManager::Instance()->load("Assets/Particle.png", "Particle", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("Assets/Particle1.png", "PlayerParticle", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("Assets/Particle2.png", "EnemyParticle", TheGame::Instance()->getRenderer());
 	mSpawnTimer.start();
 }
 
@@ -43,10 +45,26 @@ void ParticleSystem::update(Uint32 dTime)
 		//y' = y cos f + x sin f
 
 		//Spawn new particle
-		Particle* newParticle = new Particle(pCamera, new LoaderParams(
-			pos->getX()-5,
-			pos->getY()-5,
-			10, 10, "Particle", 1), 10* 60);
+		Particle* newParticle = nullptr;
+		if (mType == ParticleType::Player)
+		{
+			 newParticle = new Particle(pCamera, new LoaderParams(
+				pos->getX() - 5,
+				pos->getY() - 5,
+				10, 10, "PlayerParticle", 1), 10 * 60);
+		}
+		else if (mType == ParticleType::Enemy)
+		{
+			newParticle = new Particle(pCamera, new LoaderParams(
+				pos->getX() - 5,
+				pos->getY() - 5,
+				10, 10, "EnemyParticle", 1), 10 * 60);
+		}
+		else
+		{
+			std::cout << "Error in Particle System: undeclared particle type" << std::endl;
+		}
+		
 		float ejectSpeed = -10.0;
 		newParticle->setVelocity(Vector2D(ejectSpeed* std::cos((pTarget->getRotation() - 90)*(M_PI / 180)), ejectSpeed* std::sin((pTarget->getRotation() - 90)*(M_PI / 180))));
 		newParticle->enableFriction(true);

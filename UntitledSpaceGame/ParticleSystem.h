@@ -8,7 +8,13 @@
 class ParticleSystem
 {
 public:
-	ParticleSystem(Camera* camera, SDLGameObject* target, Ship::Engine enginePosition);
+	enum ParticleType
+	{
+		Player,
+		Enemy
+	};
+
+	ParticleSystem(Camera* camera, SDLGameObject* target, Ship::Engine enginePosition, ParticleType type);
 
 	void draw();
 	void update(Uint32 dTime);
@@ -25,4 +31,6 @@ private:
 	std::vector<Particle*> mParticles;
 	bool bIsEnabled;
 	Ship::Engine mEnginePositon;
+	
+	ParticleType mType;
 };
