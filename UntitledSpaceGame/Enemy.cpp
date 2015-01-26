@@ -67,12 +67,12 @@ bool Enemy::checkTargetinFOV()
 	centerOffset += getPosition();
 	
 	Vector2D LeftPositionOffset = Vector2D(
-		-300 * std::cos((mRotation + 90)*(M_PI / 180)) - getWidth() / 2 * std::sin((mRotation + 90)*(M_PI / 180)),
-		-300 * std::sin((mRotation + 90)*(M_PI / 180)) + getWidth() / 2 * std::cos((mRotation + 90)*(M_PI / 180)));
+		-700 * std::cos((mRotation + 90)*(M_PI / 180)) - getWidth() / 2 * std::sin((mRotation + 90)*(M_PI / 180)),
+		-700 * std::sin((mRotation + 90)*(M_PI / 180)) + getWidth() / 2 * std::cos((mRotation + 90)*(M_PI / 180)));
 
 	Vector2D RightPositionOffset = Vector2D(
-		-300 * std::cos((mRotation + 90)*(M_PI / 180)) - -getWidth() / 2 * std::sin((mRotation + 90)*(M_PI / 180)),
-		-300 * std::sin((mRotation + 90)*(M_PI / 180)) + -getWidth() / 2 * std::cos((mRotation + 90)*(M_PI / 180)));
+		-700 * std::cos((mRotation + 90)*(M_PI / 180)) - -getWidth() / 2 * std::sin((mRotation + 90)*(M_PI / 180)),
+		-700 * std::sin((mRotation + 90)*(M_PI / 180)) + -getWidth() / 2 * std::cos((mRotation + 90)*(M_PI / 180)));
 
 	LeftPositionOffset += centerOffset;
 	RightPositionOffset += centerOffset;
@@ -91,6 +91,7 @@ bool Enemy::checkTargetinFOV()
 		RightPositionOffset.getX() - pCamera->getPosition().getX(),
 		RightPositionOffset.getY() - pCamera->getPosition().getY());
 	*/
+	
 
 	if (PointInTriangle(pTarget->getPosition() + Vector2D(pTarget->getWidth() / 2, pTarget->getHeight() / 2), getPosition() + Vector2D(getWidth() / 2, getHeight() / 2), LeftPositionOffset, RightPositionOffset))
 	{

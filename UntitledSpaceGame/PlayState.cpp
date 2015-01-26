@@ -55,12 +55,12 @@ bool PlayState::onEnter()
 {
 	std::cout << "Entering PlayState" << std::endl;
 	//Set up Cameras
-	WorldCamera = new Camera;
-	ParalaxCamera = new Camera;
-	UICamera = new Camera;
+	WorldCamera       = new Camera;
+	ParalaxCamera     = new Camera;
+	UICamera          = new Camera;
 
 	//Set up Layers
-	for (int i = 0; i < Layer::NumberOfLayers; i++)
+	for (int i        = 0; i < Layer::NumberOfLayers; i++)
 	{
 		mLayers.push_back(new Layer());
 	}
@@ -68,14 +68,21 @@ bool PlayState::onEnter()
 	mUniverseLayerTop = new Universe(WorldCamera,1234);
 	mUniverseLayerBot = new Universe(ParalaxCamera, 1234);
 
-	TheTextureManager::Instance()->load("Assets/Ship.png", "Player", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("Assets/EnemyShip.png", "EnemyShip", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("Assets/Ship.png",      "Player",		TheGame::Instance()->getRenderer());
 
 	//mLayers[LAYERS::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player",1)));
 
-	mpPlayer = new Player(WorldCamera, new LoaderParams(0, 0, 100, 100, "Player", 1, LoaderParams::ALLIED));
+	mpPlayer = new Player(WorldCamera, new LoaderParams(0, 0, 100, 100, "Player", .7, LoaderParams::ALLIED));
 	mLayers[Layer::Game]->push_back(mpPlayer);
 
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(100, 100, 100, 100, "Player", 1, LoaderParams::ENEMY), mpPlayer));
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(500, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(5000, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(-500, 5000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(5000, 5500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(1000, 50000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(900, 2000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(8000, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
 
 	//Setup camera
 	Vector2D pos(
@@ -102,34 +109,5 @@ bool PlayState::onExit()
 	delete WorldCamera;
 	delete mUniverseLayerTop;
 	delete mUniverseLayerBot;
-	return true;
-}
-
-bool PlayState::checkCollision(SDLGameObject* o1, SDLGameObject* o2)
-{
-	int leftA, leftB;
-	int rightA, rightB;
-	int topA, topB;
-	int bottomA, bottomB;
-
-	//Calculate the sides of rect A
-	leftA = o1->getPosition().getX();
-	rightA = o1->getPosition().getX() + o1->getWidth();
-	topA = o1->getPosition().getY();
-	bottomA = o1->getPosition().getY() + o1->getHeight();
-
-	//Calculate the sides of rect B
-	leftB = o2->getPosition().getX();
-	rightB = o2->getPosition().getX() + o2->getWidth();
-	topB = o2->getPosition().getY();
-	bottomB = o2->getPosition().getY() + o2->getHeight();
-
-	//If any of the sides from A are outside of B
-	if (bottomA <= topB){ return false; }
-	if (topA >= bottomB){ return false; }
-	if (rightA <= leftB){ return false; }
-	if (leftA >= rightB){ return false; }
-
-	//Else collision
 	return true;
 }
