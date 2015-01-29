@@ -8,23 +8,35 @@
 Ship::Ship(Camera* camera, const LoaderParams* pParams, ShipType type) :
 SDLGameObject(camera, pParams),
 mLightTrail(this, camera),
-mType(type)
+mType(type),
+pCamera(camera)
 {
 	enableFriction(true);
 	bEnginesFireing      = false;
-	mEngineThrust        = 20;
-	mMass                = 100;
-	mMaxSpeed            = 20;
-	reloadTime           = 1 * 60;
+	
 	bReloaded            = true;
+
+	bIsAlive = true;
+
+
 	ParticleSystem::ParticleType particleType;
 	if (mType == ShipType::Player)
 	{
 		particleType = ParticleSystem::ParticleType::Player;
+		mEngineThrust = 20;
+		mMass = 100;
+		mMaxSpeed = 20;
+		reloadTime = 1 * 60;
+		health = 5000;
 	}
 	else if (mType == ShipType::Enemy)
 	{
 		particleType = ParticleSystem::ParticleType::Enemy;
+		mEngineThrust = 15;
+		mMass = 100;
+		mMaxSpeed = 20;
+		reloadTime = 1 * 120;
+		health = 10;
 	}
 	else
 	{
@@ -35,9 +47,9 @@ mType(type)
 	pParticleSystemRight = new ParticleSystem(camera, this, Engine::RIGHT, particleType);
 	
 
-	mColBox.pos = Vector2D(25, 25);
-	mColBox.height = mHeight - 50;
-	mColBox.width = mWidth - 50;
+	mColBox.pos = Vector2D(0, 0);
+	mColBox.height = mHeight;
+	mColBox.width = mWidth;
 }
 
 void Ship::draw()
@@ -47,6 +59,17 @@ void Ship::draw()
 	pParticleSystemRight->draw();
 
 	SDLGameObject::draw();
+
+	/*
+	SDL_SetRenderDrawColor(TheGame::Instance()->getRenderer(), 142, 226, 255, 0xFF);
+
+
+		SDL_RenderDrawLine(TheGame::Instance()->getRenderer(),
+			mPrevPositions.at(i)->getX() - pCamera->getPosition().getX(),
+			mPrevPositions.at(i)->getY() - pCamera->getPosition().getY(),
+			mPrevPositions.at(i + 1)->getX() - pCamera->getPosition().getX(),
+			mPrevPositions.at(i + 1)->getY() - pCamera->getPosition().getY());
+		*/
 }
 
 void Ship::update(Uint32 dTime)
@@ -75,6 +98,11 @@ void Ship::update(Uint32 dTime)
 	}
 
 	SDLGameObject::update(dTime);
+
+	if (health <= 0)
+	{
+		bIsAlive = false;
+	}
 }
 
 void Ship::fireEngine(bool bState)

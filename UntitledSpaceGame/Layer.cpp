@@ -53,11 +53,21 @@ void Layer::handleCollisions()
 	{ //Loop though all bullets
 		for (int j = 0; j < mGameObjects.size(); j++)
 		{
-			if ((pProjectiles.at(i))->getTag() != dynamic_cast<SDLGameObject*>(mGameObjects.at(j))->getTag())
+			SDLGameObject* object = dynamic_cast<SDLGameObject*>(mGameObjects.at(j));
+			if ((pProjectiles.at(i))->getTag() != object->getTag())
 			{
-				if (checkCollision(pProjectiles.at(i), dynamic_cast<SDLGameObject*>(mGameObjects.at(j))))
+				if (checkCollision(pProjectiles.at(i), object))
 				{
 					TheProjectileManager::Instance()->destroyProjectile(pProjectiles.at(i));
+					dynamic_cast<Ship*>(object)->damage(1);
+					if (!dynamic_cast<Ship*>(object)->isAlive())
+					{ //Ship is dead
+						dynamic_cast<Ship*>(object)->clean();
+						delete object;
+						mGameObjects.erase(mGameObjects.begin() + j);
+						j--;
+					}
+					
 				}
 			}
 		}

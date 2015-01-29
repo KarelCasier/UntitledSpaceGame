@@ -38,9 +38,19 @@ public:
 	void fireEngine(bool bState);
 	void fireGun();
 
+	void damage(int dmg)
+	{
+		health -= dmg;
+	}
+
 	Vector2D* getEnginePosition(Engine pos);
 
 	void reload();
+
+	bool isAlive()
+	{
+		return bIsAlive;
+	}
 
 protected:
 
@@ -49,6 +59,12 @@ protected:
 	float mEngineThrust;
 	bool bEnginesFireing;
 	bool bReloaded;
+
+	int health;
+
+	bool bIsAlive;
+
+	Camera* pCamera;
 	ShipType mType;
 
 

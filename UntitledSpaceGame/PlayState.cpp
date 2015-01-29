@@ -30,7 +30,8 @@ bool PlayState::update(Uint32 dTime)
 	mUniverseLayerTop->update(dTime);
 	
 	WorldCamera->setPosition(pos); //Center Camera on player
-	ParalaxCamera->setPosition(WorldCamera->getPosition() / 2);
+	ParalaxCameraMidground->setPosition(WorldCamera->getPosition() / 1.5);
+	ParalaxCameraBackground->setPosition(ParalaxCameraMidground->getPosition() / 2);
 
 	//check Collisions
 	mLayers[Layer::Game]->handleCollisions();
@@ -55,9 +56,10 @@ bool PlayState::onEnter()
 {
 	std::cout << "Entering PlayState" << std::endl;
 	//Set up Cameras
-	WorldCamera       = new Camera;
-	ParalaxCamera     = new Camera;
-	UICamera          = new Camera;
+	WorldCamera					= new Camera;
+	ParalaxCameraBackground     = new Camera;
+	ParalaxCameraMidground		= new Camera;
+	UICamera					 = new Camera;
 
 	//Set up Layers
 	for (int i        = 0; i < Layer::NumberOfLayers; i++)
@@ -65,8 +67,8 @@ bool PlayState::onEnter()
 		mLayers.push_back(new Layer());
 	}
 
-	mUniverseLayerTop = new Universe(WorldCamera,1234);
-	mUniverseLayerBot = new Universe(ParalaxCamera, 1234);
+	mUniverseLayerTop = new Universe(ParalaxCameraMidground,1234);
+	mUniverseLayerBot = new Universe(ParalaxCameraBackground, 1234);
 
 	TheTextureManager::Instance()->load("Assets/EnemyShip.png", "EnemyShip", TheGame::Instance()->getRenderer());
 	TheTextureManager::Instance()->load("Assets/Ship.png",      "Player",		TheGame::Instance()->getRenderer());
@@ -105,6 +107,8 @@ bool PlayState::onExit()
 	TheTextureManager::Instance()->clearFromTextureMap("Player");
 	TheInputHandler::Instance()->reset();
 	TheProjectileManager::Instance()->clean();
+	delete ParalaxCameraBackground;
+	delete ParalaxCameraMidground;
 	delete UICamera;
 	delete WorldCamera;
 	delete mUniverseLayerTop;

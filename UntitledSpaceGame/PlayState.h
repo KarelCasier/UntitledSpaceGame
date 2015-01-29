@@ -29,7 +29,8 @@ private:
 	std::vector<Layer*> mLayers;
 
 	Camera* WorldCamera;
-	Camera* ParalaxCamera;
+	Camera* ParalaxCameraBackground;
+	Camera* ParalaxCameraMidground;
 	Camera* UICamera;
 
 	Universe* mUniverseLayerTop;
