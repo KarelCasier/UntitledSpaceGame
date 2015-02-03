@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Layer.h"
 #include "Universe.h"
+#include "EnemySpawner.h"
 
 class PlayState : public GameState
 {
@@ -19,8 +20,6 @@ public:
 	virtual bool onExit();
 
 	virtual std::string getStateID() const { return s_playID; }
-
-	bool checkCollision(SDLGameObject* object1, SDLGameObject* object2);
 
 private:
 
@@ -37,4 +36,6 @@ private:
 	Universe* mUniverseLayerBot;
 
 	Player * mpPlayer;
+
+	EnemySpawner* mEnemySpawner;
 };

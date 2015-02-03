@@ -8,6 +8,8 @@ const std::string PlayState::s_playID = "PLAY";
 
 bool PlayState::update(Uint32 dTime)
 {
+	mEnemySpawner->update();
+
 	TheProjectileManager::Instance()->update(dTime);
 
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
@@ -78,13 +80,14 @@ bool PlayState::onEnter()
 	mpPlayer = new Player(WorldCamera, new LoaderParams(0, 0, 100, 100, "Player", .7, LoaderParams::ALLIED));
 	mLayers[Layer::Game]->push_back(mpPlayer);
 
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(500, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(5000, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(-500, 5000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(5000, 5500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(1000, 50000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(900, 2000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
-	mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(8000, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	//mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(500, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	//mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(5000, 500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	//mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(-500, 5000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	//mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(5000, 5500, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	//mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(1000, 50000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+	//mLayers[Layer::Game]->push_back(new Enemy(WorldCamera, new LoaderParams(900, 2000, 100, 100, "EnemyShip", .5, LoaderParams::ENEMY), mpPlayer));
+
+	mEnemySpawner = new EnemySpawner(mLayers[Layer::Game], WorldCamera, mpPlayer);
 
 	//Setup camera
 	Vector2D pos(
@@ -113,5 +116,6 @@ bool PlayState::onExit()
 	delete WorldCamera;
 	delete mUniverseLayerTop;
 	delete mUniverseLayerBot;
+	delete mEnemySpawner;
 	return true;
 }
