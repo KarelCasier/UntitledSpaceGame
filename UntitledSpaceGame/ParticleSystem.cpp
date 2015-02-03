@@ -51,21 +51,21 @@ void ParticleSystem::update(Uint32 dTime)
 			 newParticle = new Particle(pCamera, new LoaderParams(
 				pos->getX() - 5,
 				pos->getY() - 5,
-				10, 10, "PlayerParticle", 1), 10 * 60);
+				10, 10, "PlayerParticle", 1), 5 * 60);
 		}
 		else if (mType == ParticleType::Enemy)
 		{
 			newParticle = new Particle(pCamera, new LoaderParams(
 				pos->getX() - 5,
 				pos->getY() - 5,
-				10, 10, "EnemyParticle", 1), 10 * 60);
+				10, 10, "EnemyParticle", 1), 5 * 60);
 		}
 		else
 		{
 			std::cout << "Error in Particle System: undeclared particle type" << std::endl;
 		}
 		
-		float ejectSpeed = -10.0;
+		float ejectSpeed = -5.0;
 		newParticle->setVelocity(Vector2D(ejectSpeed* std::cos((pTarget->getRotation() - 90)*(M_PI / 180)), ejectSpeed* std::sin((pTarget->getRotation() - 90)*(M_PI / 180))));
 		newParticle->enableFriction(true);
 
@@ -87,6 +87,7 @@ void ParticleSystem::update(Uint32 dTime)
 			mParticles[i]->clean();
 			delete mParticles[i];
 			mParticles.erase(mParticles.begin() + i);
+			i--;
 		}
 	}
 }

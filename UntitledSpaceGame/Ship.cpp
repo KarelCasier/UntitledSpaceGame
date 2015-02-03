@@ -48,8 +48,8 @@ pCamera(camera)
 	
 
 	mColBox.pos = Vector2D(0, 0);
-	mColBox.height = mHeight;
-	mColBox.width = mWidth;
+	mColBox.height = getHeight();
+	mColBox.width = getWidth();
 }
 
 void Ship::draw()
